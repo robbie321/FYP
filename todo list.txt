@@ -1,0 +1,29 @@
+#TODO
+18 - FEB
+change sheild.initialize(initshield,initshield) to (initshield, 100)
+spells
+move from one scene to another
+Inventory
+Information message to player when new game is started to tell the player whe they are a wizard
+Then tell player objectives to complete to move on in the game
+28TH - FEB
+Make objectives, give reward or xp bonus when player completes an objective
+when all objectives complete, player(Ally) must meet with Ulric back in the village
+Ulric then tells Ally how to get to the next town 
+This is when the player must play through a 2D platform level to progress
+7TH - MAR
+
+Things the player can do freely:
+battle enemies for xp points
+explore the world in search of items
+
+Players mana strats on 0. Ulrich advises you to collect apples or find mana potions so you can use your spells
+
+You first meet ulrich in the village. He tells you to bring him 2 apples and a healing her before he will give you answers.
+You go in search of the apples and healing herb. Apples can be found in trees. The healing herb are dropped from enemies after battle.
+Or possible to buy healing herb from other NPCs if you have the right amount of coins
+
+After collecting the 2 apples and healing herb you return to Ulric. Ulric informs you that he saw the king and his executioner leave the rusty forest.
+He advises you to go and check it out.
+
+Ally goes back to the forest where he saw the king cast the spell. He finds an empty potion bottle. 
