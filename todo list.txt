@@ -27,3 +27,8 @@ After collecting the 2 apples and healing herb you return to Ulric. Ulric inform
 He advises you to go and check it out.
 
 Ally goes back to the forest where he saw the king cast the spell. He finds an empty potion bottle. 
+
+
+git add . 
+git commit -m " F "
+git push origin
