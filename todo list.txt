@@ -29,6 +29,8 @@ He advises you to go and check it out.
 Ally goes back to the forest where he saw the king cast the spell. He finds an empty potion bottle. 
 
 
+Ulrich trains you to fight the king by fighting enemies that he spawns in the forest
+
 git add . 
 git commit -m " F "
 git push origin
