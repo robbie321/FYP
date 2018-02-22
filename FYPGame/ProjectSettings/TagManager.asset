@@ -7,6 +7,7 @@ TagManager:
   - Item
   - Obstacle
   - Target
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -17,8 +18,8 @@ TagManager:
   - 
   - 
   - Player
-  - NPC
-  - 
+  - Block
+  - Clickable
   - 
   - 
   - 

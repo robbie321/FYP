@@ -11,7 +11,7 @@ public class Spell : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         myRigidbody = GetComponent<Rigidbody2D>();
-        target = GameObject.FindGameObjectWithTag("Target").transform;
+        target = GameObject.FindGameObjectWithTag("Enemy").transform;
 	}
 	
 	// Update is called once per frame

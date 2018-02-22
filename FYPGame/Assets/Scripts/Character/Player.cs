@@ -2,47 +2,54 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// This is the player script, it contains functionality that is specific to the Player
-/// </summary>
+
+// This is the player script, it contains functionality that is specific to the Player
 public class Player : Character
 {
     private Vector3 min, max;
-    /// <summary>
-    /// The player's health
-    /// </summary>
+    // The player's health
     [SerializeField]
     private StatBar health;
-    /// <summary>
-    /// The player's mana
-    /// </summary>
+    // The player's mana
     [SerializeField]
     private StatBar shield;
-
-    /// <summary>
-    /// The player's initialHealth
-    /// </summary>
+    // The player's initialHealth
     [SerializeField]
     private float initHealth;
-
-    /// <summary>
-    /// The player's initial mana
-    /// </summary>
+    // The player's initial mana
     [SerializeField]
     private float initShield;
 
     private IInventoryItem mCurrentItem = null;
-    private bool mLockPickup = false;
-    public Inventory inventory;
-    public HUD Hud;
 
+    private bool mLockPickup = false;
+    //reference to Inventory
+    public Inventory inventory;
+    //reference to HUD
+    public HUD Hud;
+    //array to store our spells
     [SerializeField]
     private GameObject[] spellPrefabs;
-
     //exit points for spells
     [SerializeField]
     private Transform[] exitPoints;
+    //The players sight block
+    [SerializeField]
+    private SightBlock[] sightBlocks;
+    //players target
+    public Transform Target
+    {
+        get
+        {
+            return _target;
+        }
+        set
+        {
+            _target = value;
+        }
+    }
 
+    //index to keep track of what exit point to use, 0 is defaulted as down
     private int exitIndex = 0;
 
     protected override void Start()
@@ -50,21 +57,18 @@ public class Player : Character
 
         health.Initialize(initHealth, initHealth);
         shield.Initialize(initShield, initShield);
-
+        // Target = GameObject.FindGameObjectWithTag("Target").transform;
         base.Start();
     }
-
-    /// <summary>
-    /// We are overriding the characters update function, so that we can execute our own functions
-    /// </summary>
+    // We are overriding the characters update function, so that we can execute our own functions
     protected override void Update()
     {
         //Executes the GetInput function
         GetInput();
+        //Clamps the player inside the tilemap
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, min.x, max.x),
         Mathf.Clamp(transform.position.y, min.y + 4, max.y),
         transform.position.z);
-
         // Pickup item
         if (mItemToPickup != null && Input.GetKeyDown(KeyCode.F))
         {
@@ -77,14 +81,12 @@ public class Player : Character
         base.Update();
     }
 
-    /// <summary>
-    /// Listen's to the players input
-    /// </summary>
+    // Listen's to the players input
     private void GetInput()
     {
         direction = Vector2.zero;
 
-        ///THIS IS USED FOR DEBUGGING ONLY
+        //THIS IS USED FOR DEBUGGING ONLY
         if (Input.GetKeyDown(KeyCode.I))
         {
             health.PlayerCurrentValue -= 10;
@@ -93,7 +95,7 @@ public class Player : Character
         if (Input.GetKeyDown(KeyCode.O))
         {
             health.PlayerCurrentValue += 10;
-           shield.PlayerCurrentValue += 10;
+            shield.PlayerCurrentValue += 10;
         }
 
         if (Input.GetKey(KeyCode.W)) //Moves up
@@ -104,7 +106,7 @@ public class Player : Character
         if (Input.GetKey(KeyCode.A)) //Moves left
         {
             exitIndex = 1;
-            direction += Vector2.left; 
+            direction += Vector2.left;
         }
         if (Input.GetKey(KeyCode.S))
         {
@@ -116,9 +118,10 @@ public class Player : Character
             exitIndex = 2;
             direction += Vector2.right;
         }
-       if (Input.GetKeyDown(KeyCode.LeftShift)) //Makes the player attack
+        if (Input.GetKeyDown(KeyCode.LeftShift)) //Makes the player attack
         {
-            if (!isAttacking && !IsMoving) //Chcks if we are able to attack
+            BlockView();
+            if (Target != null && !isAttacking && !IsMoving && RaycastSight()) //Chcks if we are able to attack and in line of sight
             {
                 //coroutine is used to do something at the same time the script is running
                 attackRoutine = StartCoroutine(Attack());
@@ -126,10 +129,7 @@ public class Player : Character
         }
     }
     //----ATTACK AND SPELLS----
-    /// <summary>
-    /// A co routine for attacking
-    /// </summary>
-    /// <returns></returns>
+    // A co routine for attacking
     private IEnumerator Attack()
     {
         isAttacking = true; //Indicates if we are attacking
@@ -138,7 +138,7 @@ public class Player : Character
 
         yield return new WaitForSeconds(1); //This is a hardcoded cast time, for debugging
 
-        CastSpell();
+        CastSpell();//casts spell
 
         StopAttack(); //Ends the attack
     }
@@ -147,10 +147,38 @@ public class Player : Character
     {
         Instantiate(spellPrefabs[0], exitPoints[exitIndex].position, Quaternion.identity);
     }
+    //use a RayCast line to see if we are in the line of sigh to hit an enemy
+    private bool RaycastSight()
+    {
+        //calculate direction
 
+        Vector3 targetDirection = (Target.position - transform.position).normalized;
+        //cast a ray from the player to our target
+        //make sure the raycast can only hit our blocks and not the player by creating a new layer called block(9)
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDirection, Vector2.Distance(transform.position, Target.position), 512);
+
+        if (hit.collider == null)
+        {
+
+            return true;
+        }
+        return false;
+    }
+
+    private void BlockView()
+    {
+        foreach (SightBlock sb in sightBlocks)
+        {
+            sb.DeactivateBlock();
+        }
+        //exit index keeps track of where we are facing
+        //based on direction it will enable the blocks for that direction
+        sightBlocks[exitIndex].ActivateBlock();
+    }
 
     //----INVENTORY----
     private IInventoryItem mItemToPickup = null;
+    private Transform _target;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -162,9 +190,6 @@ public class Player : Character
                 return;
 
             mItemToPickup = item;
-
-            //inventory.AddItem(item);
-            //item.OnPickup();
             Hud.OpenMessagePanel("Click F");
         }
     }
@@ -194,8 +219,6 @@ public class Player : Character
     {
         mLockPickup = true;
 
-        // _animator.SetTrigger("tr_drop");
-
         GameObject goItem = (mCurrentItem as MonoBehaviour).gameObject;
 
         inventory.RemoveItem(mCurrentItem);
@@ -218,5 +241,5 @@ public class Player : Character
         this.max = max;
     }
 
-  
+
 }

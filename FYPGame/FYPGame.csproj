@@ -310,6 +310,7 @@
     <Compile Include="Assets\Scripts\Character\LayerSorter.cs" />
     <Compile Include="Assets\Scripts\Character\Player.cs" />
     <Compile Include="Assets\Scripts\Character\Villager.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Inventory and items\Apple.cs" />
     <Compile Include="Assets\Scripts\Inventory and items\ElectricSpell.cs" />
     <Compile Include="Assets\Scripts\Inventory and items\FireSpell.cs" />
@@ -326,6 +327,7 @@
     <Compile Include="Assets\Scripts\Objectives\ObjectiveManager.cs" />
     <Compile Include="Assets\Scripts\Objectives\ObjectiveObject.cs" />
     <Compile Include="Assets\Scripts\Objectives\ObjectiveTrigger.cs" />
+    <Compile Include="Assets\Scripts\Spell\SightBlock.cs" />
     <Compile Include="Assets\Scripts\Spell\Spell.cs" />
     <Compile Include="Assets\Scripts\Tile Scripts\Obstacle.cs" />
     <Compile Include="Assets\Scripts\Tile Scripts\TreeTile.cs" />
