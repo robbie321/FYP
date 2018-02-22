@@ -140,17 +140,7 @@ Tilemap:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1482062367908188}
   m_Enabled: 1
-  m_Tiles:
-  - first: {x: -29, y: 53, z: 0}
-    second:
-      m_TileIndex: 5
-      m_TileSpriteIndex: 5
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 3
-      m_ObjectToInstantiate: {fileID: 1043814763695048, guid: 832786beb801dab4bb7d9d71123bd6a6,
-        type: 2}
-      m_TileFlags: 1
-      m_ColliderType: 1
+  m_Tiles: {}
   m_AnimatedTiles: {}
   m_TileAssetArray:
   - m_RefCount: 0
@@ -163,8 +153,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: 08d08c539f5635c4082384f1da1d7151, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
@@ -176,27 +166,27 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: 8ce11fed54e8e4543bcd5a1e14522309, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileMatrixArray:
-  - m_RefCount: 1
+  - m_RefCount: 0
     m_Data:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
+      e00: 5528.4453
+      e01: 5528.4453
+      e02: 226.43921
+      e03: 8.79168e-39
       e10: 0
-      e11: 1
+      e11: 0
       e12: 0
       e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
+      e20: NaN
+      e21: 0.0000000010302115
+      e22: 0.0000000010302115
+      e23: 1.7195868e-14
+      e30: NaN
       e31: 0
       e32: 0
-      e33: 1
+      e33: 4.5907e-41
   m_TileColorArray:
   - m_RefCount: 0
     m_Data: {r: 2.2e-44, g: 0, b: 0, a: NaN}
@@ -204,8 +194,8 @@ Tilemap:
     m_Data: {r: 0, g: 0, b: 2753018, a: 0}
   - m_RefCount: 0
     m_Data: {r: 2.3523665e+15, g: 0, b: 2.0638557e-37, a: 0}
-  - m_RefCount: 1
-    m_Data: {r: 1, g: 1, b: 1, a: 1}
+  - m_RefCount: 0
+    m_Data: {r: 0.0000000010302115, g: 0, b: 5.2069956e-11, a: 0}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -30, y: 0, z: 0}

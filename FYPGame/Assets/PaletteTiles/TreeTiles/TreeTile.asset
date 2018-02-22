@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0e7633697bf4b346a97f8181e31585b, type: 3}
   m_Name: TreeTile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 8ce11fed54e8e4543bcd5a1e14522309, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f176160f943b1164092c3fab65936e77, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -30,7 +30,7 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 1
-  m_InstancedGameObject: {fileID: 1043814763695048, guid: 832786beb801dab4bb7d9d71123bd6a6,
+  m_InstancedGameObject: {fileID: 1303679534930572, guid: 43f7ea44079ed01449376f15391d83fb,
     type: 2}
   m_Flags: 1
   m_ColliderType: 1

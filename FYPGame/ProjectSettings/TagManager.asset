@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Item
+  - Obstacle
+  - Target
   layers:
   - Default
   - TransparentFX
@@ -42,7 +44,7 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Obstacle
+  - name: TopLayer
     uniqueID: 1066657415
     locked: 0
   - name: Player

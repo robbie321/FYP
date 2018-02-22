@@ -2,88 +2,68 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Character {
+/// <summary>
+/// This is the player script, it contains functionality that is specific to the Player
+/// </summary>
+public class Player : Character
+{
     private Vector3 min, max;
-    //players health
+    /// <summary>
+    /// The player's health
+    /// </summary>
     [SerializeField]
-    protected StatBar health, shield, coin;
+    private StatBar health;
+    /// <summary>
+    /// The player's mana
+    /// </summary>
+    [SerializeField]
+    private StatBar shield;
+
+    /// <summary>
+    /// The player's initialHealth
+    /// </summary>
     [SerializeField]
     private float initHealth;
+
+    /// <summary>
+    /// The player's initial mana
+    /// </summary>
     [SerializeField]
     private float initShield;
-    [SerializeField]
-    private int initCoin;
+
     private IInventoryItem mCurrentItem = null;
     private bool mLockPickup = false;
     public Inventory inventory;
     public HUD Hud;
-    //private StatBar health;
-    protected override void Start() {
+
+    [SerializeField]
+    private GameObject[] spellPrefabs;
+
+    //exit points for spells
+    [SerializeField]
+    private Transform[] exitPoints;
+
+    private int exitIndex = 0;
+
+    protected override void Start()
+    {
+
         health.Initialize(initHealth, initHealth);
-        shield.Initialize(initShield, 100);
-        inventory.ItemRemoved += Inventory_ItemRemoved;
-        // coin.InitializeCoin(initCoin);
+        shield.Initialize(initShield, initShield);
+
         base.Start();
     }
 
-    private void Inventory_ItemRemoved(object sender, InventoryEventArgs e)
+    /// <summary>
+    /// We are overriding the characters update function, so that we can execute our own functions
+    /// </summary>
+    protected override void Update()
     {
-        IInventoryItem item = e.Item;
-
-        GameObject goItem = (item as MonoBehaviour).gameObject;
-        goItem.SetActive(true);
-        goItem.transform.parent = null;
-    }
-
-
-
-    private void DropCurrentItem()
-    {
-        mLockPickup = true;
-
-       // _animator.SetTrigger("tr_drop");
-
-        GameObject goItem = (mCurrentItem as MonoBehaviour).gameObject;
-
-        inventory.RemoveItem(mCurrentItem);
-
-        // Throw animation
-        Rigidbody rbItem = goItem.AddComponent<Rigidbody>();
-        if (rbItem != null)
-        {
-            rbItem.AddForce(transform.forward * 2.0f, ForceMode.Impulse);
-
-            Invoke("DoDropItem", 0.25f);
-        }
-
-    }
-
-    public void DoDropItem()
-    {
-        mLockPickup = false;
-
-        // Remove Rigidbody
-        Destroy((mCurrentItem as MonoBehaviour).GetComponent<Rigidbody>());
-
-        mCurrentItem = null;
-    }
-
-    void FixedUpdate()
-    {
-        // Drop item
-        if (mCurrentItem != null && Input.GetKeyDown(KeyCode.R))
-        {
-            DropCurrentItem();
-        }
-    }
-    // Update is called once per frame
-    //Player overrides character update
-    protected override void Update () {
-       GetKeyInput();
-        
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x,min.x,max.x), 
-            Mathf.Clamp(transform.position.y, min.y + 4, max.y),
-            transform.position.z);
+        //Executes the GetInput function
+        GetInput();
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, min.x, max.x),
+        Mathf.Clamp(transform.position.y, min.y + 4, max.y),
+        transform.position.z);
 
         // Pickup item
         if (mItemToPickup != null && Input.GetKeyDown(KeyCode.F))
@@ -94,11 +74,82 @@ public class Player : Character {
 
             mItemToPickup = null;
         }
-
-        //Executes Character.cs Update
         base.Update();
-	}
+    }
 
+    /// <summary>
+    /// Listen's to the players input
+    /// </summary>
+    private void GetInput()
+    {
+        direction = Vector2.zero;
+
+        ///THIS IS USED FOR DEBUGGING ONLY
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            health.PlayerCurrentValue -= 10;
+            shield.PlayerCurrentValue -= 10;
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            health.PlayerCurrentValue += 10;
+           shield.PlayerCurrentValue += 10;
+        }
+
+        if (Input.GetKey(KeyCode.W)) //Moves up
+        {
+            exitIndex = 3;
+            direction += Vector2.up;
+        }
+        if (Input.GetKey(KeyCode.A)) //Moves left
+        {
+            exitIndex = 1;
+            direction += Vector2.left; 
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            exitIndex = 0;
+            direction += Vector2.down;//Moves down
+        }
+        if (Input.GetKey(KeyCode.D)) //Moves right
+        {
+            exitIndex = 2;
+            direction += Vector2.right;
+        }
+       if (Input.GetKeyDown(KeyCode.LeftShift)) //Makes the player attack
+        {
+            if (!isAttacking && !IsMoving) //Chcks if we are able to attack
+            {
+                //coroutine is used to do something at the same time the script is running
+                attackRoutine = StartCoroutine(Attack());
+            }
+        }
+    }
+    //----ATTACK AND SPELLS----
+    /// <summary>
+    /// A co routine for attacking
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator Attack()
+    {
+        isAttacking = true; //Indicates if we are attacking
+
+        animator.SetBool("attack", isAttacking); //Starts the attack animation
+
+        yield return new WaitForSeconds(1); //This is a hardcoded cast time, for debugging
+
+        CastSpell();
+
+        StopAttack(); //Ends the attack
+    }
+
+    public void CastSpell()
+    {
+        Instantiate(spellPrefabs[0], exitPoints[exitIndex].position, Quaternion.identity);
+    }
+
+
+    //----INVENTORY----
     private IInventoryItem mItemToPickup = null;
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -128,47 +179,38 @@ public class Player : Character {
         }
     }
 
-
-
-
-    private void GetKeyInput()
+    private void Inventory_ItemRemoved(object sender, InventoryEventArgs e)
     {
-        //direction reset after each loop
-        direction = Vector2.zero;
+        IInventoryItem item = e.Item;
 
-        if (Input.GetAxisRaw("Vertical") > 0)
-        {
-            direction = Vector2.up;
-        }
-
-        if (Input.GetAxisRaw("Horizontal") < 0)
-        {
-            direction = Vector2.left;
-        }
-
-        if (Input.GetAxisRaw("Vertical") < 0)
-        {
-            direction = Vector2.down;
-        }
-
-        if (Input.GetAxisRaw("Horizontal") >0)
-        {
-            direction = Vector2.right;
-        }
-        //HEALTH DEBUGGING
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            health.PlayerCurrentValue -= 10;
-            shield.PlayerCurrentValue -= 10;
-
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            health.PlayerCurrentValue += 10;
-            shield.PlayerCurrentValue += 10;
-        //    coin.CurrentCoinValue -= 10;
-        }
+        GameObject goItem = (item as MonoBehaviour).gameObject;
+        goItem.SetActive(true);
+        goItem.transform.parent = null;
     }
+
+
+
+    private void DropCurrentItem()
+    {
+        mLockPickup = true;
+
+        // _animator.SetTrigger("tr_drop");
+
+        GameObject goItem = (mCurrentItem as MonoBehaviour).gameObject;
+
+        inventory.RemoveItem(mCurrentItem);
+
+        // Throw animation
+        Rigidbody rbItem = goItem.AddComponent<Rigidbody>();
+        if (rbItem != null)
+        {
+            rbItem.AddForce(transform.forward * 2.0f, ForceMode.Impulse);
+
+            Invoke("DoDropItem", 0.25f);
+        }
+
+    }
+    //----CAMERA----
     //camera tells the player its min and max values
     public void SetLimits(Vector3 min, Vector3 max)
     {
@@ -176,28 +218,5 @@ public class Player : Character {
         this.max = max;
     }
 
-   
-    /*private void OnTriggerEnter2D(Collider2D collision)
-     {
-         if (collision.CompareTag("Item"))
-         {
-             IInventoryItem item = collision.GetComponent<IInventoryItem>();
-             if (item != null)
-             {
-                 Debug.Log("Item Picked up");
-                 inventory.AddItem(item);
-             }
-         }
-
-     }*/
-    
-     /*   private void OnControllerColliderHit(ControllerColliderHit hit)
-        {
-            //check if item has an IInventoryItem attached
-            IInventoryItem item = hit.collider.GetComponent<IInventoryItem>();
-            if(item != null)
-            {
-                inventory.AddItem(item);
-            }
-        }*/
+  
 }

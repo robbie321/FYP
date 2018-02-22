@@ -42,7 +42,7 @@ namespace Assets.FantasyHeroes.Scripts
             }
 
             trail.Apply();
-            GetComponent<SpriteRenderer>().sprite = Sprite.Create(trail, new Rect(0, 0, trail.width, trail.height), new Vector2(0.5f, 0.5f), 100);
+          //  GetComponent<SpriteRenderer>().sprite = Sprite.Create(trail, new Rect(0, 0, trail.width, trail.height), new Vector2(0.5f, 0.5f), 100);
         }
 
         private static Texture2D CopyNotReadableSprite(Sprite sprite)

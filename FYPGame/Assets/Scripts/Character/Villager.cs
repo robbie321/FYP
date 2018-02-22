@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Villager : Character {
-    public float moveSpeed;
+   // public float moveSpeed;
     private Vector2 maxWalkPoint;
     private Vector2 minWalkPoint;
-    public bool isMoving;
+    public bool moving;
     public float walkTime;
     private float walkCounter;
     public float waitTime;
     private float waitCounter;
+    //0,1 0 to go right, 1 to go left
     private int walkDirection;
     public Collider2D walkZone;
     private bool hasWalkZone;
+    //check if player is facing right
     private bool facingRight;
     [SerializeField]
     public bool canMove;
@@ -21,8 +23,7 @@ public class Villager : Character {
 	// Use this for initialization
 	protected override void Start () {
         animator = GetComponent<Animator>();
-        rigidBody = GetComponent<Rigidbody2D>();
-        
+        myRigidbody = GetComponent<Rigidbody2D>();
         dm = FindObjectOfType<Dialogue>();
         waitCounter = waitTime;
         walkCounter = walkTime;
@@ -34,14 +35,14 @@ public class Villager : Character {
 
     // Update is called once per frame
     protected override void Update () {
-        getMovement();
-        checkIfTalking();
+        GetMovement();
+        CheckIfTalking();
       //  base.Update();
 	}
-    private void getMovement()
+    private void GetMovement()
     {
-        //direction = Vector2.zero;
-        if (isMoving)
+        direction = Vector2.zero;
+        if (moving)
         {
 
 
@@ -51,8 +52,7 @@ public class Villager : Character {
                     rigidBody.velocity = new Vector2(0, moveSpeed);
                     break;*/
                 case 0:
-                   // direction = Vector2.right;
-                    rigidBody.velocity = Vector2.right;
+                    direction = Vector2.right;     
                     animator.SetFloat("speed", 1);
                     
                     break;
@@ -60,15 +60,14 @@ public class Villager : Character {
                     rigidBody.velocity = new Vector2(0, -moveSpeed);
                     break;*/
                 case 1:
-                    //direction = Vector2.left;
-                    rigidBody.velocity = Vector2.left;
+                    direction = Vector2.left;
                     animator.SetFloat("speed", 1);
                     break;
             }
             walkCounter -= Time.deltaTime;
             if (walkCounter < 0)
             {
-                isMoving = false;
+                moving = false;
                 waitCounter = waitTime;
             }
             
@@ -76,7 +75,7 @@ public class Villager : Character {
         else
         {
             waitCounter -= Time.deltaTime;
-            rigidBody.velocity = Vector2.zero;
+            direction += Vector2.zero;
             animator.SetFloat("speed", 0);
             // direction = Vector2.zero;
             if (waitCounter < 0)
@@ -97,12 +96,12 @@ public class Villager : Character {
             scale.x *= -1;
             transform.localScale = scale;
         }
-            isMoving = true;
+            moving = true;
             walkCounter = walkTime;
      
     }
 
-    private void checkIfTalking()
+    private void CheckIfTalking()
     {
         //no dialogue, sprite can move around the world
         if (!dm.dialogueActive)
@@ -113,7 +112,7 @@ public class Villager : Character {
         if (!canMove)
         {
             //direction = Vector2.zero;
-            rigidBody.velocity = Vector2.zero;
+            direction = Vector2.zero;
             return; //stop moving
         }
     }

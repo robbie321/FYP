@@ -2,24 +2,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Obstacle : MonoBehaviour, IComparable<Obstacle>
 {
-    // The obstacles spriterenderer 
-    public SpriteRenderer spriteRenderer { get; set; }
-    // Color to use the the obstacle isn't faded
+    /// <summary>
+    /// The obstacles spriterenderer 
+    /// </summary>
+    public SpriteRenderer MySpriteRenderer { get; set; }
+
+    /// <summary>
+    /// Color to use the the obstacle isn't faded
+    /// </summary>
     private Color defaultColor;
-    // Color to use the the obstacle is faded out
+
+    /// <summary>
+    /// Color to use the the obstacle is faded out
+    /// </summary>
     private Color fadedColor;
-    // Compare to, that is used for sorting the obstacles, so that we can pick the on with the lowest sortorder
+
+    /// <summary>
+    /// Compare to, that is used for sorting the obstacles, so that we can pick the on with the lowest sortorder
+    /// </summary>
+    /// <param name="other"></param>
+    /// <returns></returns>
     public int CompareTo(Obstacle other)
     {
-        if (spriteRenderer.sortingOrder > other.spriteRenderer.sortingOrder)
+        if (MySpriteRenderer.sortingOrder > other.MySpriteRenderer.sortingOrder)
         {
             return 1; //If this obstacles has a higher sortorder 
         }
-        else if (spriteRenderer.sortingOrder < other.spriteRenderer.sortingOrder)
+        else if (MySpriteRenderer.sortingOrder < other.MySpriteRenderer.sortingOrder)
         {
             return -1; //If this obstacles has a lower sortorder 
         }
@@ -31,24 +43,28 @@ public class Obstacle : MonoBehaviour, IComparable<Obstacle>
     void Start()
     {
         //Creates a reference to the spriterendere
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        MySpriteRenderer = GetComponent<SpriteRenderer>();
 
         //Creates the colors
-        defaultColor = spriteRenderer.color;
+        defaultColor = MySpriteRenderer.color;
         fadedColor = defaultColor;
         fadedColor.a = 0.7f;
     }
 
-    // Fades out the obstacle
+    /// <summary>
+    /// Fades out the obstacle
+    /// </summary>
     public void FadeOut()
     {
-        spriteRenderer.color = fadedColor;
+        MySpriteRenderer.color = fadedColor;
     }
 
-    // Fades in the obstacle
+    /// <summary>
+    /// Fades in the obstacle
+    /// </summary>
     public void FadeIn()
     {
-        spriteRenderer.color = defaultColor;
+        MySpriteRenderer.color = defaultColor;
     }
 
 }
