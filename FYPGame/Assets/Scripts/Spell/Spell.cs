@@ -7,11 +7,11 @@ public class Spell : MonoBehaviour {
     [SerializeField]
     private float speed;
 
-    private Transform target;
+    public Transform Target { get;set; }
 	// Use this for initialization
 	void Start () {
         myRigidbody = GetComponent<Rigidbody2D>();
-        target = GameObject.FindGameObjectWithTag("Enemy").transform;
+       // target = GameObject.FindGameObjectWithTag("Enemy").transform;
 	}
 	
 	// Update is called once per frame
@@ -21,13 +21,27 @@ public class Spell : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        //targets position - the fireballs position
-        Vector2 direction = target.position - transform.position;
-        myRigidbody.velocity = direction.normalized * speed;
-        //change rotation of fireball
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        //set it
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        if(Target != null)
+        {
+            //targets position - the fireballs position
+            Vector2 direction = Target.position - transform.position;
+            myRigidbody.velocity = direction.normalized * speed;
+            //change rotation of fireball
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            //set it
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
+    }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //check if whatever i collide with has the same transform as the target i want to hit
+        //can take out if our spell wants to hit any enemy in target direction
+        if(collision.tag == "HitBox" && collision.transform == Target)
+        {
+                GetComponent<Animator>().SetTrigger("impact");
+                myRigidbody.velocity = Vector2.zero;
+                Target = null;
+        }
     }
 }

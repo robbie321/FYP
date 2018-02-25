@@ -34,9 +34,9 @@ public class DialogueHolder : MonoBehaviour {
                     dm.ShowDialogue();
                 }
                 //if able to find villager movement script of parent object
-                if(transform.parent.GetComponent<Villager>() != null)
+                if(transform.parent.GetComponent<NPC>() != null)
                 {
-                    transform.parent.GetComponent<Villager>().canMove = false;
+                    transform.parent.GetComponent<NPC>().canMove = false;
                 }
             }
         }

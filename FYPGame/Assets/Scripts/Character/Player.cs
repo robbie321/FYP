@@ -118,34 +118,34 @@ public class Player : Character
             exitIndex = 2;
             direction += Vector2.right;
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift)) //Makes the player attack
-        {
-            BlockView();
-            if (Target != null && !isAttacking && !IsMoving && RaycastSight()) //Chcks if we are able to attack and in line of sight
-            {
-                //coroutine is used to do something at the same time the script is running
-                attackRoutine = StartCoroutine(Attack());
-            }
-        }
+       
     }
     //----ATTACK AND SPELLS----
     // A co routine for attacking
-    private IEnumerator Attack()
+    private IEnumerator Attack(int index)
     {
         isAttacking = true; //Indicates if we are attacking
 
         animator.SetBool("attack", isAttacking); //Starts the attack animation
 
         yield return new WaitForSeconds(1); //This is a hardcoded cast time, for debugging
-
-        CastSpell();//casts spell
+        //set the players target
+        Spell spell =  Instantiate(spellPrefabs[index], exitPoints[exitIndex].position, Quaternion.identity).GetComponent<Spell>();
+        //set spell target to players target
+        spell.Target = Target;
 
         StopAttack(); //Ends the attack
     }
-
-    public void CastSpell()
+    //cast a spell
+    public void CastSpell(int index)
     {
-        Instantiate(spellPrefabs[0], exitPoints[exitIndex].position, Quaternion.identity);
+        BlockView();
+        if (Target != null && !isAttacking && !IsMoving && RaycastSight()) //Chcks if we are able to attack and in line of sight
+        {
+            //coroutine is used to do something at the same time the script is running
+            attackRoutine = StartCoroutine(Attack(index));
+        }
+       
     }
     //use a RayCast line to see if we are in the line of sigh to hit an enemy
     private bool RaycastSight()

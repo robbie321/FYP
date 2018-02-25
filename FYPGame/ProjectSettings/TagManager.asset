@@ -8,6 +8,7 @@ TagManager:
   - Obstacle
   - Target
   - Enemy
+  - HitBox
   layers:
   - Default
   - TransparentFX
