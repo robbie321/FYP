@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class WaveSpawner : MonoBehaviour {
 
@@ -13,7 +14,8 @@ public class WaveSpawner : MonoBehaviour {
 		public int count;
 		public float rate;
 	}
-
+    [SerializeField]
+    private Text countDownText;
 	public Wave[] waves;
 	private int nextWave = 0;
 	public int NextWave
@@ -23,9 +25,9 @@ public class WaveSpawner : MonoBehaviour {
 
 	public Transform[] spawnPoints;
 
-	public float timeBetweenWaves = 5f;
+	public float timeBetweenWaves = 5;
 	private float waveCountdown;
-	public float WaveCountdown
+	public float  WaveCountdown
 	{
 		get { return waveCountdown; }
 	}
@@ -70,26 +72,46 @@ public class WaveSpawner : MonoBehaviour {
 		}
 		else
 		{
-			waveCountdown -= Time.deltaTime;
+            StartCoroutine(Timer());
+            countDownText.gameObject.SetActive(true);
+            countDownText.text = ("Fight\n" + waveCountdown.ToString("0"));
+            if(waveCountdown < 0.1f)
+            {
+                StopCoroutine(Timer());
+                countDownText.gameObject.SetActive(false);
+            }
+           // StartCoroutine(Timer());
+			//waveCountdown -= Time.deltaTime;
 		}
 	}
+
+    IEnumerator Timer()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+           waveCountdown-= Time.deltaTime;
+        }
+        
+    }
 
 	void WaveCompleted()
 	{
 		Debug.Log("Wave Completed!");
 
-		state = SpawnState.COUNTING;
-		waveCountdown = timeBetweenWaves;
+		//state = SpawnState.COUNTING;
+        state = SpawnState.COUNTING;
+        waveCountdown = timeBetweenWaves;
 
-		if (nextWave + 1 > waves.Length - 1)
-		{
-			nextWave = 0;
-			Debug.Log("ALL WAVES COMPLETE! Looping...");
-		}
-		else
-		{
-			nextWave++;
-		}
+        if (nextWave + 1 > waves.Length - 1)
+        {
+            //nextWave = 0;
+            Debug.Log("ALL WAVES COMPLETE! Looping...");
+        }
+        else
+        {
+            nextWave++;
+        }
 	}
 
 	bool EnemyIsAlive()
@@ -97,6 +119,7 @@ public class WaveSpawner : MonoBehaviour {
 		searchCountdown -= Time.deltaTime;
 		if (searchCountdown <= 0f)
 		{
+            //set back to 1 to check if enemies are still alive
 			searchCountdown = 1f;
 			if (GameObject.FindGameObjectWithTag("Enemy") == null)
 			{
@@ -116,7 +139,7 @@ public class WaveSpawner : MonoBehaviour {
 			SpawnEnemy(_wave.enemy);
 			yield return new WaitForSeconds( 1f/_wave.rate );
 		}
-
+        //waiting for player to kill enemies
 		state = SpawnState.WAITING;
 
 		yield break;
@@ -125,7 +148,7 @@ public class WaveSpawner : MonoBehaviour {
 	void SpawnEnemy(Transform _enemy)
 	{
 		Debug.Log("Spawning Enemy: " + _enemy.name);
-
+        //Spawns enemy at the transform givin in the inspector
 		Transform _sp = spawnPoints[ Random.Range (0, spawnPoints.Length) ];
 		Instantiate(_enemy, _sp.position, _sp.rotation);
 	}

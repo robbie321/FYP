@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4724970987133302}
   - component: {fileID: 58189072589800154}
   - component: {fileID: 114419745019487244}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Enemy Range
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 224102973829778528}
   - component: {fileID: 222227970039855760}
   - component: {fileID: 114199893135207668}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 222006728981707320}
   - component: {fileID: 114633938061019844}
   - component: {fileID: 114771313516507776}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: HealthFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 114821371753656976}
   - component: {fileID: 114451660344549950}
   - component: {fileID: 225535647236038934}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1476665826995670}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.786497, y: 13.279439, z: 0}
+  m_LocalPosition: {x: 75, y: 13.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4499100963234226}
@@ -186,7 +186,7 @@ CircleCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1020222658080414}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
