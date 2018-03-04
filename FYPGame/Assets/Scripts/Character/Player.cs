@@ -1,21 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 // This is the player script, it contains functionality that is specific to the Player
 public class Player : Character
 {
+    // public static Player instance;
     private Vector3 min, max;
-    // The player's health
-    [SerializeField]
-    private StatBar health;
     // The player's mana
     [SerializeField]
-    private StatBar shield;
-    // The player's initialHealth
-    [SerializeField]
-    private float initHealth;
+    public StatBar shield;
+
     // The player's initial mana
     [SerializeField]
     private float initShield;
@@ -54,12 +51,15 @@ public class Player : Character
 
     protected override void Start()
     {
-
-        health.Initialize(initHealth, initHealth);
-        shield.Initialize(initShield, initShield);
+        //get the current health total stored in GameManager.instance between scenes
+        //GameManager.instance.playerHealth = health.PlayerCurrentValue;
+        //get the current mana total stored in GameManager.instance between scenes
+        //GameManager.instance.playerMana = shield.PlayerCurrentValue;
+        shield.Initialize(initShield, 100);
         // Target = GameObject.FindGameObjectWithTag("Target").transform;
         base.Start();
     }
+
     // We are overriding the characters update function, so that we can execute our own functions
     protected override void Update()
     {
@@ -86,18 +86,6 @@ public class Player : Character
     {
         direction = Vector2.zero;
 
-        //THIS IS USED FOR DEBUGGING ONLY
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            health.PlayerCurrentValue -= 10;
-            shield.PlayerCurrentValue -= 10;
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            health.PlayerCurrentValue += 10;
-            shield.PlayerCurrentValue += 10;
-        }
-
         if (Input.GetKey(KeyCode.W)) //Moves up
         {
             exitIndex = 3;
@@ -118,51 +106,63 @@ public class Player : Character
             exitIndex = 2;
             direction += Vector2.right;
         }
-       
+
     }
     //----ATTACK AND SPELLS----
     // A co routine for attacking
     private IEnumerator Attack(int index)
     {
+        Transform currentTarget = Target;
         isAttacking = true; //Indicates if we are attacking
 
         animator.SetBool("attack", isAttacking); //Starts the attack animation
 
-        yield return new WaitForSeconds(1); //This is a hardcoded cast time, for debugging
+        yield return new WaitForSeconds(0.8f); //This is a hardcoded cast time, for debugging
         //set the players target
-        Spell spell =  Instantiate(spellPrefabs[index], exitPoints[exitIndex].position, Quaternion.identity).GetComponent<Spell>();
-        //set spell target to players target
-        spell.Target = Target;
-
+        if (currentTarget != null && RaycastSight())
+        {
+            Spell spell = Instantiate(spellPrefabs[index], exitPoints[exitIndex].position, Quaternion.identity).GetComponent<Spell>();
+            //set spell target to players target
+            spell.Initialize(currentTarget, 10);// = currentTarget;
+            shield.PlayerCurrentValue -= 5;
+        }
         StopAttack(); //Ends the attack
     }
     //cast a spell
     public void CastSpell(int index)
     {
-        BlockView();
-        if (Target != null && !isAttacking && !IsMoving && RaycastSight()) //Chcks if we are able to attack and in line of sight
+        if (shield.PlayerCurrentValue > 0)
         {
-            //coroutine is used to do something at the same time the script is running
-            attackRoutine = StartCoroutine(Attack(index));
+            BlockView();
+            if (Target != null /*&& !isAttacking && !IsMoving*/ && RaycastSight()) //Chcks if we are able to attack and in line of sight
+            {
+                //coroutine is used to do something at the same time the script is running
+                attackRoutine = StartCoroutine(Attack(index));
+            }
         }
-       
     }
     //use a RayCast line to see if we are in the line of sigh to hit an enemy
     private bool RaycastSight()
     {
-        //calculate direction
-
-        Vector3 targetDirection = (Target.position - transform.position).normalized;
-        //cast a ray from the player to our target
-        //make sure the raycast can only hit our blocks and not the player by creating a new layer called block(9)
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDirection, Vector2.Distance(transform.position, Target.position), 512);
-
-        if (hit.collider == null)
+        if (Target != null)
         {
+            //calculate direction
 
-            return true;
+            Vector3 targetDirection = (Target.position - transform.position).normalized;
+            //cast a ray from the player to our target
+            //make sure the raycast can only hit our blocks and not the player by creating a new layer called block(9)
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDirection, Vector2.Distance(transform.position, Target.position), 512);
+            //if we didnt hit the bloack, then we can cast a spell
+            if (hit.collider == null)
+            {
+
+                return true;
+            }
+
         }
+        //if we hit the block we cant cast a spell
         return false;
+
     }
 
     private void BlockView()
@@ -196,6 +196,8 @@ public class Player : Character
 
     private void OnTriggerExit2D(Collider2D other)
     {
+
+
         IInventoryItem item = other.GetComponent<IInventoryItem>();
         if (item != null)
         {

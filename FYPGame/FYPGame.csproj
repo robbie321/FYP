@@ -262,6 +262,9 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="Pathfinding.Ionic.Zip.Reduced">
+      <HintPath>Assets/AstarPathfindingProject/Plugins/DotNetZip/Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Advertisements">
       <HintPath>C:/Users/Robbie/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
     </Reference>
@@ -282,9 +285,6 @@
     </Reference>
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/Robbie/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="Pathfinding.Ionic.Zip.Reduced">
-      <HintPath>Assets/AstarPathfindingProject/Plugins/DotNetZip/Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -397,6 +397,7 @@
     <Compile Include="Assets\AstarPathfindingProject\Utilities\ProfileHelper.cs" />
     <Compile Include="Assets\AstarPathfindingProject\Utilities\RetainedGizmos.cs" />
     <Compile Include="Assets\AstarPathfindingProject\Utilities\UnityReferenceHelper.cs" />
+    <Compile Include="Assets\ButtonClick.cs" />
     <Compile Include="Assets\FantasyHeroes\Scripts\AnimationEvents.cs" />
     <Compile Include="Assets\FantasyHeroes\Scripts\AnimationManager.cs" />
     <Compile Include="Assets\FantasyHeroes\Scripts\Character.cs" />
@@ -412,15 +413,21 @@
     <Compile Include="Assets\FantasyHeroes\Scripts\SpriteGroupEntry.cs" />
     <Compile Include="Assets\FantasyHeroes\Scripts\SpriteSheetMaker.cs" />
     <Compile Include="Assets\FantasyHeroes\Scripts\WeaponType.cs" />
+    <Compile Include="Assets\Scripts\AddMana.cs" />
+    <Compile Include="Assets\Scripts\Behaviours\DeathBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Behaviours\SpellBehaviour.cs" />
     <Compile Include="Assets\Scripts\Canvas\Dialogue.cs" />
     <Compile Include="Assets\Scripts\Canvas\DialogueHolder.cs" />
     <Compile Include="Assets\Scripts\Canvas\HUD.cs" />
     <Compile Include="Assets\Scripts\Canvas\StatBar.cs" />
     <Compile Include="Assets\Scripts\Character\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Character\Character.cs" />
+    <Compile Include="Assets\Scripts\Character\Enemy.cs" />
     <Compile Include="Assets\Scripts\Character\LayerSorter.cs" />
     <Compile Include="Assets\Scripts\Character\NPC.cs" />
     <Compile Include="Assets\Scripts\Character\Player.cs" />
+    <Compile Include="Assets\Scripts\Character\Range.cs" />
+    <Compile Include="Assets\Scripts\Fading.cs" />
     <Compile Include="Assets\Scripts\Inventory and items\Apple.cs" />
     <Compile Include="Assets\Scripts\Inventory and items\ElectricSpell.cs" />
     <Compile Include="Assets\Scripts\Inventory and items\FireSpell.cs" />
@@ -432,19 +439,22 @@
     <Compile Include="Assets\Scripts\Inventory and items\ItemDropHandler.cs" />
     <Compile Include="Assets\Scripts\Inventory and items\Potion.cs" />
     <Compile Include="Assets\Scripts\Inventory and items\WaterSpell.cs" />
+    <Compile Include="Assets\Scripts\Managers\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Managers\LevelManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\Loader.cs" />
     <Compile Include="Assets\Scripts\Managers\MainMenuButtonManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\Sound.cs" />
     <Compile Include="Assets\Scripts\Managers\UIManager.cs" />
     <Compile Include="Assets\Scripts\Managers\WaveSpawner.cs" />
     <Compile Include="Assets\Scripts\Objectives\ObjectiveManager.cs" />
     <Compile Include="Assets\Scripts\Objectives\ObjectiveObject.cs" />
     <Compile Include="Assets\Scripts\Objectives\ObjectiveTrigger.cs" />
+    <Compile Include="Assets\Scripts\SceneSetUpManager.cs" />
     <Compile Include="Assets\Scripts\Spell\SightBlock.cs" />
     <Compile Include="Assets\Scripts\Spell\Spell.cs" />
     <Compile Include="Assets\Scripts\Tile Scripts\Obstacle.cs" />
     <Compile Include="Assets\Scripts\Tile Scripts\TreeTile.cs" />
-    <Compile Include="Assets\SpellBehaviour.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AstarPathfindingProject\Editor\EditorAssets\Materials\Navmesh.cginc" />

@@ -2,26 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spell : MonoBehaviour {
+public class Spell : MonoBehaviour
+{
     private Rigidbody2D myRigidbody;
     [SerializeField]
     private float speed;
 
-    public Transform Target { get;set; }
-	// Use this for initialization
-	void Start () {
+    public Transform Target { get; private set; }
+
+    private float damage;
+    // Use this for initialization
+    void Start()
+    {
         myRigidbody = GetComponent<Rigidbody2D>();
-       // target = GameObject.FindGameObjectWithTag("Enemy").transform;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        // target = GameObject.FindGameObjectWithTag("Enemy").transform;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    public void Initialize(Transform target, float damage)
+    {
+        this.Target = target;
+        this.damage = damage;
+    }
 
     private void FixedUpdate()
     {
-        if(Target != null)
+        if (Target != null)
         {
             //targets position - the fireballs position
             Vector2 direction = Target.position - transform.position;
@@ -37,11 +48,13 @@ public class Spell : MonoBehaviour {
     {
         //check if whatever i collide with has the same transform as the target i want to hit
         //can take out if our spell wants to hit any enemy in target direction
-        if(collision.tag == "HitBox" && collision.transform == Target)
+        if (collision.tag == "HitBox" && collision.transform == Target)
         {
-                GetComponent<Animator>().SetTrigger("impact");
-                myRigidbody.velocity = Vector2.zero;
-                Target = null;
+            speed = 0;
+            collision.GetComponentInParent<Enemy>().TakeDamage(10);
+            GetComponent<Animator>().SetTrigger("impact");
+            myRigidbody.velocity = Vector2.zero;
+            Target = null;
         }
     }
 }

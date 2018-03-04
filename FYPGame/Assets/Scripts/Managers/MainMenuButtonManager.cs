@@ -8,4 +8,10 @@ public class MainMenuButtonManager : MonoBehaviour {
     {
         SceneManager.LoadScene(newGameLevel);
     }
+
+
+    public void OnButtonClicked()
+    {
+        FindObjectOfType<AudioManager>().Play("Button Click");
+    }
 }
