@@ -1,25 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
     //public float playerHealth;
-   // public float playerMana;
+    // public float playerMana;
     /// <summary>
     /// A reference to the player object
     /// </summary>
     [SerializeField]
     private Player player;
-
+    private KeyboardInput controller = new KeyboardInput();
     private int level = 3;
-   
+    private MoveUpCommand up;
+    MoveLeftCommand left;
+    MoveDownCommand down;
+    MoveRightCommand right;
     private NPC currentTarget;
     private void Awake()
     {
-        
+
         if (instance == null)
             instance = this;
         else
@@ -31,12 +32,21 @@ public class GameManager : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        SetActivePlayer(player);
+        SetControllerCommand();
+    }
+
+
+
 
     // Update is called once per frame
     void Update()
     {
         //Executes click target
         ClickTarget();
+        controller.HandleInput();
     }
 
     private void ClickTarget()
@@ -57,11 +67,11 @@ public class GameManager : MonoBehaviour
 
                 player.Target = currentTarget.Select(); //Gives the player the new target
 
-               
+
             }
             else//Deselect the target
             {
-                
+
 
                 if (currentTarget != null) //If we have a current target
                 {
@@ -75,4 +85,26 @@ public class GameManager : MonoBehaviour
         }
 
     }
+    //INVOKER
+    public KeyboardInput GetKeyboardInput()
+    {
+        return controller;
+    }
+
+    public void SetActivePlayer(Character character)
+    {
+        up = new MoveUpCommand(character);
+        left = new MoveLeftCommand(character);
+        down = new MoveDownCommand(character);
+        right = new MoveRightCommand(character);
+    }
+
+    public void SetControllerCommand()
+    {
+        controller.SetCommand("W", up);
+        controller.SetCommand("A", left);
+        controller.SetCommand("S", down);
+        controller.SetCommand("D", right);
+    }
+
 }

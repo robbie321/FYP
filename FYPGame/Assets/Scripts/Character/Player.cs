@@ -64,7 +64,7 @@ public class Player : Character
     protected override void Update()
     {
         //Executes the GetInput function
-        GetInput();
+        //GetInput();
         //Clamps the player inside the tilemap
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, min.x, max.x),
         Mathf.Clamp(transform.position.y, min.y + 4, max.y),

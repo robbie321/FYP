@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,6 +30,8 @@ public abstract class Character : MonoBehaviour
     private float initHealth;
     [SerializeField]
     protected StatBar health;
+    //index to keep track of what exit point to use, 0 is defaulted as down
+    protected int exitIndex = 0;
     // Indicates if character is moving or not
     public bool IsMoving
     {
@@ -130,5 +133,32 @@ public abstract class Character : MonoBehaviour
             // animator.SetTrigger("die");
             //die
         }
+    }
+
+
+
+    public void MoveDown()
+    {
+        exitIndex = 0;
+        direction += Vector2.down;
+    }
+
+    public void MoveLeft()
+    {
+        exitIndex = 1;
+        direction += Vector2.left;
+    }
+
+    public void MoveRight()
+    {
+        exitIndex = 2;
+        direction += Vector2.right;
+    }
+
+    public void MoveUp()
+    {
+        exitIndex = 3;
+        direction += Vector2.up;
+
     }
 }
