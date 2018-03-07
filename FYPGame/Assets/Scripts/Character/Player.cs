@@ -47,7 +47,7 @@ public class Player : Character
     }
 
     //index to keep track of what exit point to use, 0 is defaulted as down
-    private int exitIndex = 0;
+    //private int exitIndex = 0;
 
     protected override void Start()
     {
@@ -63,6 +63,7 @@ public class Player : Character
     // We are overriding the characters update function, so that we can execute our own functions
     protected override void Update()
     {
+        
         //Executes the GetInput function
         //GetInput();
         //Clamps the player inside the tilemap
@@ -82,9 +83,9 @@ public class Player : Character
     }
 
     // Listen's to the players input
-    private void GetInput()
+   /* private void GetInput()
     {
-        direction = Vector2.zero;
+       // direction = Vector2.zero;
 
         if (Input.GetKey(KeyCode.W)) //Moves up
         {
@@ -107,7 +108,7 @@ public class Player : Character
             direction += Vector2.right;
         }
 
-    }
+    }*/
     //----ATTACK AND SPELLS----
     // A co routine for attacking
     private IEnumerator Attack(int index)

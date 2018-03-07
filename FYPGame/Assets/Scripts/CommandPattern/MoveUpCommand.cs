@@ -22,4 +22,9 @@ public class MoveUpCommand : ICommand {
         player.MoveUp();
     }
 
+    public void Undo()
+    {
+        player.Stop();
+    }
+
 }

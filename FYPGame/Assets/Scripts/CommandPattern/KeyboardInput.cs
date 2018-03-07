@@ -10,6 +10,7 @@ public class KeyboardInput {
     
 	  //characterCommands is a list of set commands	 
     Dictionary<string, ICommand> characterCommands;
+    
     ICommand Command;// { get; set; }
     public KeyboardInput()
     {
@@ -21,15 +22,18 @@ public class KeyboardInput {
 	 */
     public void HandleInput()
     {
-        if (Input.GetKey(KeyCode.W))
+        //characterCommands.TryGetValue("D",out Command);
+        //direction = Vector2.zero;
+        if (Input.GetKeyDown(KeyCode.W))
         {
             Debug.Log("Button Pressed");
             ButtonPressed("W");
-            
+         
         }
-        if (Input.GetKey(KeyCode.D)) this.ButtonPressed("D");
-        if (Input.GetKey(KeyCode.A)) this.ButtonPressed("A");
-        if (Input.GetKey(KeyCode.S)) this.ButtonPressed("S");
+        if (Input.GetKeyDown(KeyCode.D)) ButtonPressed("D");
+        if (Input.GetKeyDown(KeyCode.A)) ButtonPressed("A");
+        if (Input.GetKeyDown(KeyCode.S)) ButtonPressed("S");
+        else if(!Input.anyKey) UndoButtonPressed();
         //if (Input.GetKey(KeyCode.W)) this.buttonPressed("one");
     }
     /*
@@ -40,6 +44,7 @@ public class KeyboardInput {
     {
         characterCommands.Add(button, command);
     }
+
     /*
 	 * buttonPressed takes in a string argument, which is the key value in the hashmap
 	 * it then takes this string value and executes the corresponding command stored in the hashmap.
@@ -50,5 +55,10 @@ public class KeyboardInput {
           characterCommands.TryGetValue(button, out Command);
           Command.Execute();
         
+    }
+
+    public void UndoButtonPressed()
+    {
+        Command.Undo();
     }
 }

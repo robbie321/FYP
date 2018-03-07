@@ -23,5 +23,10 @@ public class MoveLeftCommand :ICommand {
         player.MoveLeft();
     }
 
+    public void Undo()
+    {
+        player.Stop();
+    }
+
 }
 

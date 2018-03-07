@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,5 +23,10 @@ public class MoveDownCommand : ICommand {
     public void Execute()
     {
         player.MoveDown();
+    }
+
+    public void Undo()
+    {
+        player.Stop();
     }
 }

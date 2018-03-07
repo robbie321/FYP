@@ -61,11 +61,13 @@ public abstract class Character : MonoBehaviour
 
     private void FixedUpdate()
     {
+        
         Move();
     }
     // Moves the player
     public void Move()
     {
+
         //Makes sure that the player moves
         myRigidbody.velocity = direction.normalized * speed;
     }
@@ -160,5 +162,10 @@ public abstract class Character : MonoBehaviour
         exitIndex = 3;
         direction += Vector2.up;
 
+    }
+
+    public void Stop()
+    {
+        direction = Vector2.zero;
     }
 }

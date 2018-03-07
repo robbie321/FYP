@@ -23,5 +23,9 @@ public class MoveRightCommand : ICommand
         player.MoveRight();
     }
 
+    public void Undo()
+    {
+        player.Stop();
+    }
 }
 
