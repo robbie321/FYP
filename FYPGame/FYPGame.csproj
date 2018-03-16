@@ -289,6 +289,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\_Platerformer_Level_Kit\MoveCam.cs" />
+    <Compile Include="Assets\ActivateObject.cs" />
     <Compile Include="Assets\AstarPathfindingProject\Behaviors\AIDestinationSetter.cs" />
     <Compile Include="Assets\AstarPathfindingProject\Behaviors\Patrol.cs" />
     <Compile Include="Assets\AstarPathfindingProject\changelog.cs" />
