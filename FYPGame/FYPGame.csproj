@@ -429,6 +429,7 @@
     <Compile Include="Assets\Scripts\Character\Player.cs" />
     <Compile Include="Assets\Scripts\Character\Range.cs" />
     <Compile Include="Assets\Scripts\CommandPattern(Player)\Command.cs" />
+    <Compile Include="Assets\Scripts\CommandPattern(Player)\EscapeButtonCommand.cs" />
     <Compile Include="Assets\Scripts\CommandPattern(Player)\KeyboardInput.cs" />
     <Compile Include="Assets\Scripts\CommandPattern(Player)\MoveDownCommand.cs" />
     <Compile Include="Assets\Scripts\CommandPattern(Player)\MoveLeftCommand.cs" />

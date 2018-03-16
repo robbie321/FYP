@@ -33,7 +33,8 @@ public class KeyboardInput {
         if (Input.GetKeyDown(KeyCode.D)) ButtonPressed("D");
         if (Input.GetKeyDown(KeyCode.A)) ButtonPressed("A");
         if (Input.GetKeyDown(KeyCode.S)) ButtonPressed("S");
-        else if(!Input.anyKey) UndoButtonPressed();
+        if (Input.GetKeyDown(KeyCode.Escape)) ButtonPressed("Escape");
+        else if (!Input.anyKey) UndoButtonPressed();
         //if (Input.GetKey(KeyCode.W)) this.buttonPressed("one");
     }
     /*

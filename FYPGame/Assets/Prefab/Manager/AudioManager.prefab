@@ -54,7 +54,7 @@ MonoBehaviour:
   sounds:
   - name: Death
     clip: {fileID: 8300000, guid: 04c60199c34308942826efc50df1b4cd, type: 3}
-    volume: 1
+    volume: 0.087
     pitch: 1
     source: {fileID: 0}
   - name: Button Click

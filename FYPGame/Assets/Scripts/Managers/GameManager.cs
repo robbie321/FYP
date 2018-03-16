@@ -11,12 +11,14 @@ public class GameManager : MonoBehaviour
     /// </summary>
     [SerializeField]
     private Player player;
+    [SerializeField]
+    private UIManager commands;
     private KeyboardInput controller = new KeyboardInput();
-    private int level = 3;
     private MoveUpCommand up;
-    MoveLeftCommand left;
-    MoveDownCommand down;
-    MoveRightCommand right;
+    private MoveLeftCommand left;
+    private MoveDownCommand down;
+    private MoveRightCommand right;
+    private EscapeButtonCommand escape;
     private NPC currentTarget;
     private void Awake()
     {
@@ -34,6 +36,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        SetUICommands(commands);
         SetActivePlayer(player);
         SetControllerCommand();
     }
@@ -99,12 +102,18 @@ public class GameManager : MonoBehaviour
         right = new MoveRightCommand(character);
     }
 
+    public void SetUICommands(UIManager command)
+    {
+        escape = new EscapeButtonCommand(command);
+    }
+
     public void SetControllerCommand()
     {
         controller.SetCommand("W", up);
         controller.SetCommand("A", left);
         controller.SetCommand("S", down);
         controller.SetCommand("D", right);
+        controller.SetCommand("Escape", escape);
     }
 
 }

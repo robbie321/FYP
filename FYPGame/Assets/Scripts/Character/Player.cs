@@ -48,9 +48,20 @@ public class Player : Character
 
     //index to keep track of what exit point to use, 0 is defaulted as down
     //private int exitIndex = 0;
-
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+        DontDestroyOnLoad(gameObject);
+    }
     protected override void Start()
     {
+        
         spellBook = GetComponent<SpellBook>();
         //get the current health total stored in GameManager.instance between scenes
         //GameManager.instance.playerHealth = health.PlayerCurrentValue;
