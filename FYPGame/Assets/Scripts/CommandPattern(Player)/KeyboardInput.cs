@@ -59,6 +59,14 @@ public class KeyboardInput {
 
     public void UndoButtonPressed()
     {
-        Command.Undo();
+        if(Command == null)
+        {
+            Debug.Log("Command not set");
+        }
+        else
+        {
+            Command.Undo();
+        }
+        
     }
 }

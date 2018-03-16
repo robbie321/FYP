@@ -10,15 +10,15 @@ public abstract class Character : MonoBehaviour
 {
     //The Player's movement speed
     [SerializeField]
-    protected float speed;
+    private float speed;
     // A reference to the character's animator
-    protected Animator animator;
+    private Animator animator;
     //The Player's direction
-    protected Vector2 direction;
+    private Vector2 direction;
     //The Character's rigidbody
     protected Rigidbody2D myRigidbody;
     // indicates if the character is attacking or not
-    protected bool isAttacking = false;
+    private bool isAttacking = false;
     protected bool isDead = false;
     // A reference to the attack coroutine
     protected Coroutine attackRoutine;
@@ -32,12 +32,78 @@ public abstract class Character : MonoBehaviour
     protected StatBar health;
     //index to keep track of what exit point to use, 0 is defaulted as down
     protected int exitIndex = 0;
+    private Transform target;
+    public Transform Target
+    {
+        get
+        {
+            return target;
+        }
+
+        set
+        {
+            target = value;
+        }
+    }
+
     // Indicates if character is moving or not
     public bool IsMoving
     {
         get
         {
-            return direction.x != 0 || direction.y != 0;
+            return Direction.x != 0 || Direction.y != 0;
+        }
+    }
+
+    public Vector2 Direction
+    {
+        get
+        {
+            return direction;
+        }
+
+        set
+        {
+            direction = value;
+        }
+    }
+
+    public float Speed
+    {
+        get
+        {
+            return speed;
+        }
+
+        set
+        {
+            speed = value;
+        }
+    }
+
+    public bool IsAttacking
+    {
+        get
+        {
+            return isAttacking;
+        }
+
+        set
+        {
+            isAttacking = value;
+        }
+    }
+
+    public Animator Animator
+    {
+        get
+        {
+            return animator;
+        }
+
+        set
+        {
+            animator = value;
         }
     }
 
@@ -47,7 +113,7 @@ public abstract class Character : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody2D>();
 
         //Makes a reference to the character's animator
-        animator = GetComponent<Animator>();
+        Animator = GetComponent<Animator>();
 
         //Initialise characters health
         health.Initialize(initHealth, initHealth);
@@ -67,9 +133,12 @@ public abstract class Character : MonoBehaviour
     // Moves the player
     public void Move()
     {
-
-        //Makes sure that the player moves
-        myRigidbody.velocity = direction.normalized * speed;
+        if (!isDead)
+        {
+            //Makes sure that the player moves
+            myRigidbody.velocity = Direction.normalized * Speed;
+        }
+       
     }
     //Makes sure that the right animation layer is playing
     public void HandleLayers()
@@ -80,12 +149,12 @@ public abstract class Character : MonoBehaviour
             ActivateLayer("Walk Layer");
 
             //Sets the animation parameter so that he faces the correct direction
-            animator.SetFloat("x", direction.x);
-            animator.SetFloat("y", direction.y);
+            Animator.SetFloat("x", Direction.x);
+            Animator.SetFloat("y", Direction.y);
 
             //StopAttack();
         }
-        else if (isAttacking)
+        else if (IsAttacking)
         {
             ActivateLayer("Attack Layer");
         }
@@ -104,34 +173,28 @@ public abstract class Character : MonoBehaviour
     // Activates an animation layer based on a string
     public void ActivateLayer(string layerName)
     {
-        for (int i = 0; i < animator.layerCount; i++)
+        for (int i = 0; i < Animator.layerCount; i++)
         {
-            animator.SetLayerWeight(i, 0);
+            Animator.SetLayerWeight(i, 0);
         }
 
-        animator.SetLayerWeight(animator.GetLayerIndex(layerName), 1);
+        Animator.SetLayerWeight(Animator.GetLayerIndex(layerName), 1);
     }
-    // Stops the attack
-    public void StopAttack()
+
+    public virtual void TakeDamage(float damage, Transform source)
     {
-        if (attackRoutine != null) //Checks if we have a reference to an co routine
+        if(Target == null)
         {
-            StopCoroutine(attackRoutine);
-
-            isAttacking = false; //Makes sure that we are not attacking
-
-            animator.SetBool("attack", isAttacking); //Stops the attack animation
+            Target = source;
         }
-
-    }
-    public virtual void TakeDamage(float damage)
-    {
         //reduce health
         health.PlayerCurrentValue -= damage;
         if (health.PlayerCurrentValue <= 0)
         {
+            Direction = Vector2.zero;
+            myRigidbody.velocity = Direction;
             isDead = true;
-            animator.SetBool("die", isDead);
+            Animator.SetBool("die", isDead);
             // animator.SetTrigger("die");
             //die
         }
@@ -142,30 +205,30 @@ public abstract class Character : MonoBehaviour
     public void MoveDown()
     {
         exitIndex = 0;
-        direction += Vector2.down;
+        Direction += Vector2.down;
     }
 
     public void MoveLeft()
     {
         exitIndex = 1;
-        direction += Vector2.left;
+        Direction += Vector2.left;
     }
 
     public void MoveRight()
     {
         exitIndex = 2;
-        direction += Vector2.right;
+        Direction += Vector2.right;
     }
 
     public void MoveUp()
     {
         exitIndex = 3;
-        direction += Vector2.up;
+        Direction += Vector2.up;
 
     }
 
     public void Stop()
     {
-        direction = Vector2.zero;
+        Direction = Vector2.zero;
     }
 }

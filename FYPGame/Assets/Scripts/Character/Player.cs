@@ -33,18 +33,7 @@ public class Player : Character
     //The players sight block
     [SerializeField]
     private SightBlock[] sightBlocks;
-    //players target
-    public Transform Target
-    {
-        get
-        {
-            return _target;
-        }
-        set
-        {
-            _target = value;
-        }
-    }
+
 
     //index to keep track of what exit point to use, 0 is defaulted as down
     //private int exitIndex = 0;
@@ -70,6 +59,11 @@ public class Player : Character
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, min.x, max.x),
         Mathf.Clamp(transform.position.y, min.y + 4, max.y),
         transform.position.z);
+
+        if (IsMoving)
+        {
+            StopAttack();
+        }
         // Pickup item
         if (mItemToPickup != null && Input.GetKeyDown(KeyCode.F))
         {
@@ -82,41 +76,15 @@ public class Player : Character
         base.Update();
     }
 
-    // Listen's to the players input
-   /* private void GetInput()
-    {
-       // direction = Vector2.zero;
-
-        if (Input.GetKey(KeyCode.W)) //Moves up
-        {
-            exitIndex = 3;
-            direction += Vector2.up;
-        }
-        if (Input.GetKey(KeyCode.A)) //Moves left
-        {
-            exitIndex = 1;
-            direction += Vector2.left;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            exitIndex = 0;
-            direction += Vector2.down;//Moves down
-        }
-        if (Input.GetKey(KeyCode.D)) //Moves right
-        {
-            exitIndex = 2;
-            direction += Vector2.right;
-        }
-
-    }*/
+ 
     //----ATTACK AND SPELLS----
     // A co routine for attacking
     private IEnumerator Attack(int index)
     {
         Transform currentTarget = Target;
-        isAttacking = true; //Indicates if we are attacking
+        IsAttacking = true; //Indicates if we are attacking
 
-        animator.SetBool("attack", isAttacking); //Starts the attack animation
+        Animator.SetBool("attack", IsAttacking); //Starts the attack animation
 
         yield return new WaitForSeconds(0.8f); //This is a hardcoded cast time, for debugging
         //set the players target
@@ -135,7 +103,7 @@ public class Player : Character
         if (shield.PlayerCurrentValue > 0)
         {
             BlockView();
-            if (Target != null /*&& !isAttacking && !IsMoving*/ && RaycastSight()) //Chcks if we are able to attack and in line of sight
+            if (Target != null && !IsAttacking && !IsMoving && RaycastSight()) //Chcks if we are able to attack and in line of sight
             {
                 //coroutine is used to do something at the same time the script is running
                 attackRoutine = StartCoroutine(Attack(index));
@@ -175,6 +143,20 @@ public class Player : Character
         //exit index keeps track of where we are facing
         //based on direction it will enable the blocks for that direction
         sightBlocks[exitIndex].ActivateBlock();
+    }
+
+    // Stops the attack
+    public void StopAttack()
+    {
+        if (attackRoutine != null) //Checks if we have a reference to an co routine
+        {
+            StopCoroutine(attackRoutine);
+
+            IsAttacking = false; //Makes sure that we are not attacking
+
+            Animator.SetBool("attack", IsAttacking); //Stops the attack animation
+        }
+
     }
 
     //----INVENTORY----

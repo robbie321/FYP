@@ -10,30 +10,63 @@ public class Enemy : NPC
     [SerializeField]
     private CanvasGroup healthGroup;
 
-    private Transform target;
+    private IState currentState;
 
-    public Transform Target
+    private float attackRange;
+
+    private float attackTime;
+
+   
+
+    public float AttackRange
     {
         get
         {
-            return target;
+            return attackRange;
         }
 
         set
         {
-            target = value;
+            attackRange = value;
         }
+    }
+
+    public float AttackTime
+    {
+        get
+        {
+            return attackTime;
+        }
+
+        set
+        {
+            attackTime = value;
+        }
+    }
+
+    protected void Awake()
+    {
+ 
+        
+        AttackRange = 2;
+        ChangeState(new IdleState());
     }
 
     protected override void Update()
     {
-        FollowTarget();
+        if (!isDead)
+        {
+            if (!IsAttacking)
+            {
+                attackTime += Time.deltaTime;
+            }
+            currentState.Update();
+        }
+       
         base.Update();
     }
-    /// <summary>
-    /// When the enemy is selected
-    /// </summary>
-    /// <returns></returns>
+    //When the enemy is selected
+
     public override Transform Select()
     {
         //Shows the health bar
@@ -41,10 +74,7 @@ public class Enemy : NPC
 
         return base.Select();
     }
-
-    /// <summary>
-    /// When we deselect our enemy
-    /// </summary>
+    // When we deselect our enemy
     public override void DeSelect()
     {
         //Hides the healthbar
@@ -53,18 +83,28 @@ public class Enemy : NPC
         base.DeSelect();
     }
 
-    private void FollowTarget()
+    // Makes the enemy take damage when hit
+    public override void TakeDamage(float damage, Transform source)
     {
-        if(target != null)
+        if (!(currentState is EvadeState))
         {
-            direction = (target.transform.position - transform.position).normalized;
-            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-            //animator.SetFloat("speed", 1);
+           // SetTarget(source);
+
+            base.TakeDamage(damage, source);
+
+           // OnHealthChanged(health.MyCurrentValue);
         }
-        else
-        {
-            direction = Vector2.zero;
-        }
+
     }
-  
+
+    public void ChangeState(IState newState)
+    {
+         
+        if(currentState != null)
+        {
+            currentState.Exit();
+        }
+        currentState = newState;
+        currentState.Enter(this);
+    }
 }

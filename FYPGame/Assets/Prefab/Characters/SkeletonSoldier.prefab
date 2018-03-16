@@ -275,7 +275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   hitBox: {fileID: 4499100963234226}
-  initHealth: 10
+  initHealth: 20
   health: {fileID: 114771313516507776}
   healthGroup: {fileID: 225535647236038934}
 --- !u!114 &114199893135207668

@@ -51,7 +51,7 @@ public class Spell : MonoBehaviour
         if (collision.tag == "HitBox" && collision.transform == Target)
         {
             speed = 0;
-            collision.GetComponentInParent<Enemy>().TakeDamage(10);
+            collision.GetComponentInParent<Enemy>().TakeDamage(10, transform);
             GetComponent<Animator>().SetTrigger("impact");
             myRigidbody.velocity = Vector2.zero;
             Target = null;
