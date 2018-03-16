@@ -7,12 +7,26 @@ using UnityEngine.SceneManagement;
 // This is the player script, it contains functionality that is specific to the Player
 public class Player : Character
 {
+    private static Player instance;
+
+    public static Player Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<Player>();
+            }
+
+            return instance;
+        }
+    }
     // public static Player instance;
     private Vector3 min, max;
     // The player's mana
     [SerializeField]
     public StatBar shield;
-
+    private SpellBook spellBook;
     // The player's initial mana
     [SerializeField]
     private float initShield;
@@ -24,9 +38,6 @@ public class Player : Character
     public Inventory inventory;
     //reference to HUD
     public HUD Hud;
-    //array to store our spells
-    [SerializeField]
-    private GameObject[] spellPrefabs;
     //exit points for spells
     [SerializeField]
     private Transform[] exitPoints;
@@ -40,6 +51,7 @@ public class Player : Character
 
     protected override void Start()
     {
+        spellBook = GetComponent<SpellBook>();
         //get the current health total stored in GameManager.instance between scenes
         //GameManager.instance.playerHealth = health.PlayerCurrentValue;
         //get the current mana total stored in GameManager.instance between scenes
@@ -79,26 +91,27 @@ public class Player : Character
  
     //----ATTACK AND SPELLS----
     // A co routine for attacking
-    private IEnumerator Attack(int index)
+    private IEnumerator Attack(int spellName)
     {
+        Spell newSpell = spellBook.CastSpell(spellName);
         Transform currentTarget = Target;
         IsAttacking = true; //Indicates if we are attacking
 
         Animator.SetBool("attack", IsAttacking); //Starts the attack animation
 
-        yield return new WaitForSeconds(0.8f); //This is a hardcoded cast time, for debugging
+        yield return new WaitForSeconds(newSpell.CastTime); 
         //set the players target
         if (currentTarget != null && RaycastSight())
         {
-            Spell spell = Instantiate(spellPrefabs[index], exitPoints[exitIndex].position, Quaternion.identity).GetComponent<Spell>();
+            SpellScript spell = Instantiate(newSpell.SpellPrefab, exitPoints[exitIndex].position, Quaternion.identity).GetComponent<SpellScript>();
             //set spell target to players target
-            spell.Initialize(currentTarget, 10);// = currentTarget;
+            spell.Initialize(currentTarget, newSpell.Damage, transform);
             shield.PlayerCurrentValue -= 5;
         }
         StopAttack(); //Ends the attack
     }
     //cast a spell
-    public void CastSpell(int index)
+    public void CastSpell(int spellName)
     {
         if (shield.PlayerCurrentValue > 0)
         {
@@ -106,7 +119,7 @@ public class Player : Character
             if (Target != null && !IsAttacking && !IsMoving && RaycastSight()) //Chcks if we are able to attack and in line of sight
             {
                 //coroutine is used to do something at the same time the script is running
-                attackRoutine = StartCoroutine(Attack(index));
+                attackRoutine = StartCoroutine(Attack(spellName));
             }
         }
     }

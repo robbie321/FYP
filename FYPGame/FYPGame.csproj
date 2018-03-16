@@ -461,6 +461,8 @@
     <Compile Include="Assets\Scripts\SceneSetUpManager.cs" />
     <Compile Include="Assets\Scripts\Spell\SightBlock.cs" />
     <Compile Include="Assets\Scripts\Spell\Spell.cs" />
+    <Compile Include="Assets\Scripts\Spell\SpellBook.cs" />
+    <Compile Include="Assets\Scripts\Spell\SpellScript.cs" />
     <Compile Include="Assets\Scripts\StatePattern(Enemy)\AttackState.cs" />
     <Compile Include="Assets\Scripts\StatePattern(Enemy)\EvadeState.cs" />
     <Compile Include="Assets\Scripts\StatePattern(Enemy)\FollowState.cs" />

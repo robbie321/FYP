@@ -1,60 +1,73 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using UnityEngine;
 
-public class Spell : MonoBehaviour
+[Serializable]
+public class Spell// : IUseable, IMoveable
 {
-    private Rigidbody2D myRigidbody;
+    // The Spell's name
+    [SerializeField]
+    private string name;
+    // The spell's damage
+    [SerializeField]
+    private int damage;
+    //The spell's speed
     [SerializeField]
     private float speed;
+    // The spell's cast time
+    [SerializeField]
+    private float castTime;
+    // The spell's prefab
+    [SerializeField]
+    private GameObject spellPrefab;
 
-    public Transform Target { get; private set; }
-
-    private float damage;
-    // Use this for initialization
-    void Start()
+    // Property for accessing the spell's name
+    public string Name
     {
-        myRigidbody = GetComponent<Rigidbody2D>();
-        // target = GameObject.FindGameObjectWithTag("Enemy").transform;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public void Initialize(Transform target, float damage)
-    {
-        this.Target = target;
-        this.damage = damage;
-    }
-
-    private void FixedUpdate()
-    {
-        if (Target != null)
+        get
         {
-            //targets position - the fireballs position
-            Vector2 direction = Target.position - transform.position;
-            myRigidbody.velocity = direction.normalized * speed;
-            //change rotation of fireball
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            //set it
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            return name;
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    // Property for reading the damage
+    public int Damage
     {
-        //check if whatever i collide with has the same transform as the target i want to hit
-        //can take out if our spell wants to hit any enemy in target direction
-        if (collision.tag == "HitBox" && collision.transform == Target)
+        get
         {
-            speed = 0;
-            collision.GetComponentInParent<Enemy>().TakeDamage(10, transform);
-            GetComponent<Animator>().SetTrigger("impact");
-            myRigidbody.velocity = Vector2.zero;
-            Target = null;
+            return damage;
         }
+
+    }
+    // Property for reading the speed
+    public float Speed
+    {
+        get
+        {
+            return speed;
+        }
+    }
+    // Property for reading the cast time
+    public float CastTime
+    {
+        get
+        {
+            return castTime;
+        }
+    }
+    //Property for reading the spell's prefab
+    public GameObject SpellPrefab
+    {
+        get
+        {
+            return spellPrefab;
+        }
+    }
+
+    public void Use()
+    {
+        //Player.Instance.CastSpell(Name);
     }
 }

@@ -416,6 +416,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 225535647236038934, guid: 3ac187a754d94f4418b67075229f6c55,
+        type: 2}
+      propertyPath: m_Alpha
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224102973829778528, guid: 3ac187a754d94f4418b67075229f6c55,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3ac187a754d94f4418b67075229f6c55, type: 2}
   m_IsPrefabParent: 0
@@ -8217,6 +8227,43 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 79f8044afd53acf468cbefe85ab4cfbb, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &666248290 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1370090115928610, guid: ae2284d7e236b6c4684e49ba92e369b1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1127535272}
+--- !u!114 &666248291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 666248290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f34494c92fd7ce74b9d1dc0ed8ed87cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentSpell: 
+  spellName: 
+  spells:
+  - name: Fire
+    damage: 10
+    speed: 5
+    castTime: 2
+    spellPrefab: {fileID: 1363923705693412, guid: d2db75bfbaa852d4c96bdc19e58ee481,
+      type: 2}
+  - name: Lightning
+    damage: 20
+    speed: 8
+    castTime: 3
+    spellPrefab: {fileID: 1144739770739766, guid: e46097f8652539a49b00d2022ab8f4b3,
+      type: 2}
+  - name: Ice Blast
+    damage: 5
+    speed: 5
+    castTime: 2
+    spellPrefab: {fileID: 1016693162295180, guid: 8c9d57ebd0589464086ffcdc9f65fa10,
+      type: 2}
 --- !u!224 &720703172 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224556356680899462, guid: 74d98816f6fca964a928549e04889df2,
@@ -27330,11 +27377,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4359566885587090, guid: ae2284d7e236b6c4684e49ba92e369b1, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 78.79
+      value: 65.2
       objectReference: {fileID: 0}
     - target: {fileID: 4359566885587090, guid: ae2284d7e236b6c4684e49ba92e369b1, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 9.08
+      value: 16.9
       objectReference: {fileID: 0}
     - target: {fileID: 4359566885587090, guid: ae2284d7e236b6c4684e49ba92e369b1, type: 2}
       propertyPath: m_LocalPosition.z
