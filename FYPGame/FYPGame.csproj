@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>2017.3.1f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -288,6 +290,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Buttons\IMoveable.cs" />
     <Compile Include="Assets\_Platerformer_Level_Kit\MoveCam.cs" />
     <Compile Include="Assets\AstarPathfindingProject\Behaviors\AIDestinationSetter.cs" />
     <Compile Include="Assets\AstarPathfindingProject\Behaviors\Patrol.cs" />
@@ -417,7 +420,9 @@
     <Compile Include="Assets\Scripts\Behaviours\DeathBehaviour.cs" />
     <Compile Include="Assets\Scripts\Behaviours\SpellBehaviour.cs" />
     <Compile Include="Assets\Scripts\Buttons\ActionButtons.cs" />
+    <Compile Include="Assets\Scripts\Buttons\HandleButtonClick.cs" />
     <Compile Include="Assets\Scripts\Buttons\IUseable.cs" />
+    <Compile Include="Assets\Scripts\Buttons\SpellButton.cs" />
     <Compile Include="Assets\Scripts\Canvas\Dialogue.cs" />
     <Compile Include="Assets\Scripts\Canvas\DialogueHolder.cs" />
     <Compile Include="Assets\Scripts\Canvas\HUD.cs" />
@@ -435,6 +440,7 @@
     <Compile Include="Assets\Scripts\CommandPattern(Player)\ActionButtonThree.cs" />
     <Compile Include="Assets\Scripts\CommandPattern(Player)\ActionButtonTwo.cs" />
     <Compile Include="Assets\Scripts\CommandPattern(Player)\Command.cs" />
+    <Compile Include="Assets\Scripts\CommandPattern(Player)\EButtonCommand.cs" />
     <Compile Include="Assets\Scripts\CommandPattern(Player)\EscapeButtonCommand.cs" />
     <Compile Include="Assets\Scripts\CommandPattern(Player)\KeyboardInput.cs" />
     <Compile Include="Assets\Scripts\CommandPattern(Player)\MoveDownCommand.cs" />

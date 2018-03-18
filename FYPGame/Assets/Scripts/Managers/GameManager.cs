@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     private ActionButtonThree actionButtonThree;
     private ActionButtonFour actionButtonFour;
     private ActionButtonFive actionButtonFive;
+    private EButtonCommand openCloseBook;
     private NPC currentTarget;
     private void Awake()
     {
@@ -93,6 +94,7 @@ public class GameManager : MonoBehaviour
         actionButtonThree = new ActionButtonThree();
         actionButtonFour =  new ActionButtonFour();
         actionButtonFive = new ActionButtonFive();
+        openCloseBook = new EButtonCommand();
     }
 
 
@@ -103,6 +105,7 @@ public class GameManager : MonoBehaviour
         KeyboardInput.Instance.SetCommand("A", left);
         KeyboardInput.Instance.SetCommand("S", down);
         KeyboardInput.Instance.SetCommand("D", right);
+        KeyboardInput.Instance.SetCommand("E", openCloseBook);
         KeyboardInput.Instance.SetCommand("Escape", escape);
         KeyboardInput.Instance.SetCommand("ACT1", actionButtonOne);
         KeyboardInput.Instance.SetCommand("ACT2", actionButtonTwo);

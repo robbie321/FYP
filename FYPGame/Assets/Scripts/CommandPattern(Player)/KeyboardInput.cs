@@ -52,17 +52,11 @@ public class KeyboardInput : MonoBehaviour {
 	 */
     public void HandleInput()
     {
-        //characterCommands.TryGetValue("D",out Command);
-        //direction = Vector2.zero  ;  KeyCode.W
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            Debug.Log("Button Pressed");
-            ButtonPressed("W");
-         
-        }
+        if (Input.GetKeyDown(KeyCode.W)) ButtonPressed("W");
         if (Input.GetKeyDown(KeyCode.D)) ButtonPressed("D");
         if (Input.GetKeyDown(KeyCode.A)) ButtonPressed("A");
         if (Input.GetKeyDown(KeyCode.S)) ButtonPressed("S");
+        if (Input.GetKeyDown(KeyCode.E)) ButtonPressed("E");
         if (Input.GetKeyDown(KeyCode.Alpha1)) ButtonPressed("ACT1");
         if (Input.GetKeyDown(KeyCode.Alpha2)) ButtonPressed("ACT2");
         if (Input.GetKeyDown(KeyCode.Alpha3)) ButtonPressed("ACT3");
@@ -80,11 +74,9 @@ public class KeyboardInput : MonoBehaviour {
         if (button.Contains("ACT"))
         {
             controlCommands.Add(button, command);
-           // UIManager.Instance.UpdateKeyText(key, keyBind);
         }
         else
             characterCommands.Add(button, command);
-       // UIManager.Instance.UpdateKeyText(key, keyBind);
     }
    
 

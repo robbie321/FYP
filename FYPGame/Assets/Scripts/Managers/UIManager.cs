@@ -19,6 +19,33 @@ public class UIManager : MonoBehaviour {
             return instance;
         }
     }
+
+    public CanvasGroup Controls
+    {
+        get
+        {
+            return controls;
+        }
+
+        set
+        {
+            controls = value;
+        }
+    }
+
+    public CanvasGroup Spells
+    {
+        get
+        {
+            return spells;
+        }
+
+        set
+        {
+            spells = value;
+        }
+    }
+
     //characterCommands is a list of set commands	 
     //Dictionary<string, ICommand> characterCommands;
     //Dictionary<string, ICommand> controlCommands;
@@ -27,6 +54,8 @@ public class UIManager : MonoBehaviour {
     private ActionButtons[] actionButtons;
     [SerializeField]
     private CanvasGroup controls;
+    [SerializeField]
+    private CanvasGroup spells;
     /// <summary>
     /// A reference to all the kibind buttons on the menu
     /// </summary>
@@ -40,9 +69,9 @@ public class UIManager : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
-        SetUseable(actionButtons[0], SpellBook.MyInstance.GetSpell("Lightning"));
-        SetUseable(actionButtons[1], SpellBook.MyInstance.GetSpell("Fire"));
-        SetUseable(actionButtons[2], SpellBook.MyInstance.GetSpell("Ice Blast"));
+        //SetUseable(actionButtons[0], SpellBook.MyInstance.GetSpell("Lightning"));
+        //SetUseable(actionButtons[1], SpellBook.MyInstance.GetSpell("Fire"));
+        //SetUseable(actionButtons[2], SpellBook.MyInstance.GetSpell("Ice Blast"));
 
     }
 	
@@ -52,11 +81,11 @@ public class UIManager : MonoBehaviour {
 
     }
 
-    public void OpenCloseMenu()
+
+    public void OpenClose(CanvasGroup canvasGroup)
     {
-        controls.alpha = controls.alpha > 0 ? 0 : 1;
-        controls.blocksRaycasts = controls.blocksRaycasts == true ? false : true;
-        Time.timeScale = Time.timeScale > 0 ? 0 : 1;
+        canvasGroup.alpha = canvasGroup.alpha > 0 ? 0 : 1;
+        canvasGroup.blocksRaycasts = canvasGroup.blocksRaycasts == true ? false : true;
     }
 
 
@@ -72,17 +101,6 @@ public class UIManager : MonoBehaviour {
         Array.Find(actionButtons, x => x.gameObject.name == name).Button.onClick.Invoke();
     }
 
-    public void SetUseable(ActionButtons button, IUseable useable)
-    {
-        if (useable != null)
-        {
-            button.Icon.sprite = useable.Icon;
-            button.Icon.color = Color.white;
-            button.Useable = useable;
-        }
-        else
-            Debug.Log("Error");
-    }
 
 
 }

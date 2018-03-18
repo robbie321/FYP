@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-
+//can use and move spells
 [Serializable]
-public class Spell : IUseable//, IMoveable
+public class Spell : IUseable, IMoveable
 {
     // The Spell's name
     [SerializeField]

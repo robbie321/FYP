@@ -36,7 +36,6 @@ public class Player : Character, IUseable
     // The player's mana
     [SerializeField]
     public StatBar shield;
-    private SpellBook spellBook;
     // The player's initial mana
     [SerializeField]
     private float initShield;
@@ -71,14 +70,11 @@ public class Player : Character, IUseable
     }
     protected override void Start()
     {
-        
-        spellBook = GetComponent<SpellBook>();
         //get the current health total stored in GameManager.instance between scenes
         //GameManager.instance.playerHealth = health.PlayerCurrentValue;
         //get the current mana total stored in GameManager.instance between scenes
         //GameManager.instance.playerMana = shield.PlayerCurrentValue;
         shield.Initialize(initShield, 100);
-        // Target = GameObject.FindGameObjectWithTag("Target").transform;
         base.Start();
     }
 
@@ -97,15 +93,6 @@ public class Player : Character, IUseable
         {
             StopAttack();
         }
-        // Pickup item
-        if (mItemToPickup != null && Input.GetKeyDown(KeyCode.F))
-        {
-            inventory.AddItem(mItemToPickup);
-            mItemToPickup.OnPickup();
-            Hud.CloseMessagePanel();
-
-            mItemToPickup = null;
-        }
         base.Update();
     }
 
@@ -114,7 +101,7 @@ public class Player : Character, IUseable
     // A co routine for attacking
     private IEnumerator Attack(string spellName)
     {
-        Spell newSpell = spellBook.CastSpell(spellName);
+        Spell newSpell = SpellBook.MyInstance.CastSpell(spellName);
         Transform currentTarget = Target;
         IsAttacking = true; //Indicates if we are attacking
 
@@ -203,65 +190,6 @@ public class Player : Character, IUseable
         }
     }
 
-    //----INVENTORY----
-    private IInventoryItem mItemToPickup = null;
-    private Transform _target;
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-
-        IInventoryItem item = other.GetComponent<IInventoryItem>();
-        if (item != null)
-        {
-            if (mLockPickup)
-                return;
-
-            mItemToPickup = item;
-            Hud.OpenMessagePanel("Click F");
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-
-
-        IInventoryItem item = other.GetComponent<IInventoryItem>();
-        if (item != null)
-        {
-            Hud.CloseMessagePanel();
-            mItemToPickup = null;
-        }
-    }
-
-    private void Inventory_ItemRemoved(object sender, InventoryEventArgs e)
-    {
-        IInventoryItem item = e.Item;
-
-        GameObject goItem = (item as MonoBehaviour).gameObject;
-        goItem.SetActive(true);
-        goItem.transform.parent = null;
-    }
-
-
-
-    private void DropCurrentItem()
-    {
-        mLockPickup = true;
-
-        GameObject goItem = (mCurrentItem as MonoBehaviour).gameObject;
-
-        inventory.RemoveItem(mCurrentItem);
-
-        // Throw animation
-        Rigidbody rbItem = goItem.AddComponent<Rigidbody>();
-        if (rbItem != null)
-        {
-            rbItem.AddForce(transform.forward * 2.0f, ForceMode.Impulse);
-
-            Invoke("DoDropItem", 0.25f);
-        }
-
-    }
     //----CAMERA----
     //camera tells the player its min and max values
     public void SetLimits(Vector3 min, Vector3 max)

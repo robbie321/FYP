@@ -13,8 +13,7 @@ public class HUD : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Inventory.ItemAdded += InventoryScript_ItemAdded;
-        Inventory.ItemRemoved += Inventory_ItemRemoved;
+
     }
 
     private void InventoryScript_ItemAdded(object sender, InventoryEventArgs e)
