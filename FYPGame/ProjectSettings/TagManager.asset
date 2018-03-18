@@ -9,6 +9,7 @@ TagManager:
   - Target
   - Enemy
   - HitBox
+  - Control
   layers:
   - Default
   - TransparentFX

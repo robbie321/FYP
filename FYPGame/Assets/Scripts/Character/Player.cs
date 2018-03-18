@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 
 // This is the player script, it contains functionality that is specific to the Player
-public class Player : Character
+public class Player : Character, IUseable
 {
     private static Player instance;
 
@@ -21,6 +21,16 @@ public class Player : Character
             return instance;
         }
     }
+
+    public Sprite Icon
+    {
+        get
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+
+    public IUseable Useable { get; set; }
     // public static Player instance;
     private Vector3 min, max;
     // The player's mana
@@ -102,7 +112,7 @@ public class Player : Character
  
     //----ATTACK AND SPELLS----
     // A co routine for attacking
-    private IEnumerator Attack(int spellName)
+    private IEnumerator Attack(string spellName)
     {
         Spell newSpell = spellBook.CastSpell(spellName);
         Transform currentTarget = Target;
@@ -122,7 +132,7 @@ public class Player : Character
         StopAttack(); //Ends the attack
     }
     //cast a spell
-    public void CastSpell(int spellName)
+    public void CastSpell(string spellName)
     {
         if (shield.PlayerCurrentValue > 0)
         {
@@ -181,6 +191,16 @@ public class Player : Character
             Animator.SetBool("attack", IsAttacking); //Stops the attack animation
         }
 
+    }
+
+    public void OnClick()
+    {
+        //so we can use our spells
+        //if slot on action bar is not empty
+        if (Useable != null)
+        {
+            Useable.Use();
+        }
     }
 
     //----INVENTORY----
@@ -250,5 +270,8 @@ public class Player : Character
         this.max = max;
     }
 
-
+    public void Use()
+    {
+        throw new System.NotImplementedException();
+    }
 }

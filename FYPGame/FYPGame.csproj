@@ -289,7 +289,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\_Platerformer_Level_Kit\MoveCam.cs" />
-    <Compile Include="Assets\ActivateObject.cs" />
     <Compile Include="Assets\AstarPathfindingProject\Behaviors\AIDestinationSetter.cs" />
     <Compile Include="Assets\AstarPathfindingProject\Behaviors\Patrol.cs" />
     <Compile Include="Assets\AstarPathfindingProject\changelog.cs" />
@@ -398,7 +397,6 @@
     <Compile Include="Assets\AstarPathfindingProject\Utilities\ProfileHelper.cs" />
     <Compile Include="Assets\AstarPathfindingProject\Utilities\RetainedGizmos.cs" />
     <Compile Include="Assets\AstarPathfindingProject\Utilities\UnityReferenceHelper.cs" />
-    <Compile Include="Assets\ButtonClick.cs" />
     <Compile Include="Assets\FantasyHeroes\Scripts\AnimationEvents.cs" />
     <Compile Include="Assets\FantasyHeroes\Scripts\AnimationManager.cs" />
     <Compile Include="Assets\FantasyHeroes\Scripts\Character.cs" />
@@ -414,9 +412,12 @@
     <Compile Include="Assets\FantasyHeroes\Scripts\SpriteGroupEntry.cs" />
     <Compile Include="Assets\FantasyHeroes\Scripts\SpriteSheetMaker.cs" />
     <Compile Include="Assets\FantasyHeroes\Scripts\WeaponType.cs" />
+    <Compile Include="Assets\Scripts\ActivateObject.cs" />
     <Compile Include="Assets\Scripts\AddMana.cs" />
     <Compile Include="Assets\Scripts\Behaviours\DeathBehaviour.cs" />
     <Compile Include="Assets\Scripts\Behaviours\SpellBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Buttons\ActionButtons.cs" />
+    <Compile Include="Assets\Scripts\Buttons\IUseable.cs" />
     <Compile Include="Assets\Scripts\Canvas\Dialogue.cs" />
     <Compile Include="Assets\Scripts\Canvas\DialogueHolder.cs" />
     <Compile Include="Assets\Scripts\Canvas\HUD.cs" />
@@ -428,6 +429,11 @@
     <Compile Include="Assets\Scripts\Character\NPC.cs" />
     <Compile Include="Assets\Scripts\Character\Player.cs" />
     <Compile Include="Assets\Scripts\Character\Range.cs" />
+    <Compile Include="Assets\Scripts\CommandPattern(Player)\ActionButtonFive.cs" />
+    <Compile Include="Assets\Scripts\CommandPattern(Player)\ActionButtonFour.cs" />
+    <Compile Include="Assets\Scripts\CommandPattern(Player)\ActionButtonOne.cs" />
+    <Compile Include="Assets\Scripts\CommandPattern(Player)\ActionButtonThree.cs" />
+    <Compile Include="Assets\Scripts\CommandPattern(Player)\ActionButtonTwo.cs" />
     <Compile Include="Assets\Scripts\CommandPattern(Player)\Command.cs" />
     <Compile Include="Assets\Scripts\CommandPattern(Player)\EscapeButtonCommand.cs" />
     <Compile Include="Assets\Scripts\CommandPattern(Player)\KeyboardInput.cs" />
@@ -436,7 +442,6 @@
     <Compile Include="Assets\Scripts\CommandPattern(Player)\MoveRightCommand.cs" />
     <Compile Include="Assets\Scripts\CommandPattern(Player)\MoveUpCommand.cs" />
     <Compile Include="Assets\Scripts\CommandPattern(Player)\UndoCommand.cs" />
-    <Compile Include="Assets\Scripts\Fading.cs" />
     <Compile Include="Assets\Scripts\Inventory and items\Apple.cs" />
     <Compile Include="Assets\Scripts\Inventory and items\ElectricSpell.cs" />
     <Compile Include="Assets\Scripts\Inventory and items\FireSpell.cs" />
@@ -449,6 +454,8 @@
     <Compile Include="Assets\Scripts\Inventory and items\Potion.cs" />
     <Compile Include="Assets\Scripts\Inventory and items\WaterSpell.cs" />
     <Compile Include="Assets\Scripts\Managers\AudioManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\ControlsManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\Fading.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Managers\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Managers\Loader.cs" />
@@ -471,6 +478,7 @@
     <Compile Include="Assets\Scripts\StatePattern(Enemy)\IState.cs" />
     <Compile Include="Assets\Scripts\Tile Scripts\Obstacle.cs" />
     <Compile Include="Assets\Scripts\Tile Scripts\TreeTile.cs" />
+    <Compile Include="Assets\Sprites\UI\ButtonClick.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AstarPathfindingProject\Editor\EditorAssets\Materials\Navmesh.cginc" />

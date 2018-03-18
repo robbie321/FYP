@@ -2,19 +2,49 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KeyboardInput {
+public class KeyboardInput : MonoBehaviour {
     /*
  * Keyboard_input acts as the invoker in the command pattern
  * it 
  */
-    
-	  //characterCommands is a list of set commands	 
+    private static KeyboardInput instance;
+
+    public static KeyboardInput Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<KeyboardInput>();
+            }
+
+            return instance;
+        }
+    }
+    private void Awake()
+    {
+
+        if (instance == null)
+            instance = this;
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+        DontDestroyOnLoad(gameObject);
+
+    }
+
+    //characterCommands is a list of set commands	 
     Dictionary<string, ICommand> characterCommands;
-    
+    Dictionary<string, ICommand> controlCommands;
+
     ICommand Command;// { get; set; }
+    KeyCode key;
     public KeyboardInput()
     {
         characterCommands = new Dictionary<string, ICommand>();
+        controlCommands = new Dictionary<string, ICommand>();
     }
     /*
 	 * handle_input is called to determine button clicks and execute the corresponding command
@@ -23,7 +53,7 @@ public class KeyboardInput {
     public void HandleInput()
     {
         //characterCommands.TryGetValue("D",out Command);
-        //direction = Vector2.zero;
+        //direction = Vector2.zero  ;  KeyCode.W
         if (Input.GetKeyDown(KeyCode.W))
         {
             Debug.Log("Button Pressed");
@@ -33,9 +63,13 @@ public class KeyboardInput {
         if (Input.GetKeyDown(KeyCode.D)) ButtonPressed("D");
         if (Input.GetKeyDown(KeyCode.A)) ButtonPressed("A");
         if (Input.GetKeyDown(KeyCode.S)) ButtonPressed("S");
+        if (Input.GetKeyDown(KeyCode.Alpha1)) ButtonPressed("ACT1");
+        if (Input.GetKeyDown(KeyCode.Alpha2)) ButtonPressed("ACT2");
+        if (Input.GetKeyDown(KeyCode.Alpha3)) ButtonPressed("ACT3");
+        if (Input.GetKeyDown(KeyCode.Alpha4)) ButtonPressed("ACT4");
+        if (Input.GetKeyDown(KeyCode.Alpha5)) ButtonPressed("ACT5");
         if (Input.GetKeyDown(KeyCode.Escape)) ButtonPressed("Escape");
         else if (!Input.anyKey) UndoButtonPressed();
-        //if (Input.GetKey(KeyCode.W)) this.buttonPressed("one");
     }
     /*
 	 * setCommand takes in String "button" which acts an identifier or key in the hashmap
@@ -43,8 +77,16 @@ public class KeyboardInput {
 	 */
     public void SetCommand(string button, ICommand command)
     {
-        characterCommands.Add(button, command);
+        if (button.Contains("ACT"))
+        {
+            controlCommands.Add(button, command);
+           // UIManager.Instance.UpdateKeyText(key, keyBind);
+        }
+        else
+            characterCommands.Add(button, command);
+       // UIManager.Instance.UpdateKeyText(key, keyBind);
     }
+   
 
     /*
 	 * buttonPressed takes in a string argument, which is the key value in the hashmap
@@ -52,11 +94,20 @@ public class KeyboardInput {
 	 */
     public void ButtonPressed(string button)
     {
+        if (button.Contains("ACT"))
+        {
+            controlCommands.TryGetValue(button, out Command);
+            Command.Execute(button);
+        }
+        else
+        {
+            characterCommands.TryGetValue(button, out Command);
 
-          characterCommands.TryGetValue(button, out Command);
-          Command.Execute();
-        
+            Command.Execute();
+        }
+           
     }
+  
 
     public void UndoButtonPressed()
     {

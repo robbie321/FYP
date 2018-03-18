@@ -4,21 +4,16 @@ using UnityEngine.EventSystems;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
-    //public float playerHealth;
-    // public float playerMana;
-    /// <summary>
-    /// A reference to the player object
-    /// </summary>
-    [SerializeField]
-    private Player player;
-    [SerializeField]
-    private UIManager commands;
-    private KeyboardInput controller = new KeyboardInput();
     private MoveUpCommand up;
     private MoveLeftCommand left;
     private MoveDownCommand down;
     private MoveRightCommand right;
     private EscapeButtonCommand escape;
+    private ActionButtonOne actionButtonOne;
+    private ActionButtonTwo actionButtonTwo;
+    private ActionButtonThree actionButtonThree;
+    private ActionButtonFour actionButtonFour;
+    private ActionButtonFive actionButtonFive;
     private NPC currentTarget;
     private void Awake()
     {
@@ -36,20 +31,16 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        SetUICommands(commands);
-        SetActivePlayer(player);
+        SetActivePlayer();
         SetControllerCommand();
     }
-
-
-
 
     // Update is called once per frame
     void Update()
     {
         //Executes click target
         ClickTarget();
-        controller.HandleInput();
+        KeyboardInput.Instance.HandleInput();
     }
 
     private void ClickTarget()
@@ -68,7 +59,7 @@ public class GameManager : MonoBehaviour
 
                 currentTarget = hit.collider.GetComponent<NPC>(); //Selects the new target
 
-                player.Target = currentTarget.Select(); //Gives the player the new target
+                Player.Instance.Target = currentTarget.Select(); //Gives the player the new target
 
 
             }
@@ -83,37 +74,43 @@ public class GameManager : MonoBehaviour
 
                 //We remove the references to the target
                 currentTarget = null;
-                player.Target = null;
+                Player.Instance.Target = null;
             }
         }
 
     }
+
+
+    public void SetActivePlayer()
+    {
+        up = new MoveUpCommand();
+        left = new MoveLeftCommand();
+        down = new MoveDownCommand();
+        right = new MoveRightCommand();
+        escape = new EscapeButtonCommand();
+        actionButtonOne = new ActionButtonOne();
+        actionButtonTwo = new ActionButtonTwo();
+        actionButtonThree = new ActionButtonThree();
+        actionButtonFour =  new ActionButtonFour();
+        actionButtonFive = new ActionButtonFive();
+    }
+
+
     //INVOKER
-    public KeyboardInput GetKeyboardInput()
-    {
-        return controller;
-    }
-
-    public void SetActivePlayer(Character character)
-    {
-        up = new MoveUpCommand(character);
-        left = new MoveLeftCommand(character);
-        down = new MoveDownCommand(character);
-        right = new MoveRightCommand(character);
-    }
-
-    public void SetUICommands(UIManager command)
-    {
-        escape = new EscapeButtonCommand(command);
-    }
-
     public void SetControllerCommand()
     {
-        controller.SetCommand("W", up);
-        controller.SetCommand("A", left);
-        controller.SetCommand("S", down);
-        controller.SetCommand("D", right);
-        controller.SetCommand("Escape", escape);
+        KeyboardInput.Instance.SetCommand("W", up);
+        KeyboardInput.Instance.SetCommand("A", left);
+        KeyboardInput.Instance.SetCommand("S", down);
+        KeyboardInput.Instance.SetCommand("D", right);
+        KeyboardInput.Instance.SetCommand("Escape", escape);
+        KeyboardInput.Instance.SetCommand("ACT1", actionButtonOne);
+        KeyboardInput.Instance.SetCommand("ACT2", actionButtonTwo);
+        KeyboardInput.Instance.SetCommand("ACT3", actionButtonThree);
+        KeyboardInput.Instance.SetCommand("ACT4", actionButtonFour);
+        KeyboardInput.Instance.SetCommand("ACT5", actionButtonFive);
+
+
     }
 
 }

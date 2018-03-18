@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 
 [Serializable]
-public class Spell// : IUseable, IMoveable
+public class Spell : IUseable//, IMoveable
 {
     // The Spell's name
     [SerializeField]
@@ -22,7 +22,11 @@ public class Spell// : IUseable, IMoveable
     // The spell's prefab
     [SerializeField]
     private GameObject spellPrefab;
-
+    /// <summary>
+    /// The spell's icon
+    /// </summary>
+    [SerializeField]
+    private Sprite icon;
     // Property for accessing the spell's name
     public string Name
     {
@@ -66,8 +70,16 @@ public class Spell// : IUseable, IMoveable
         }
     }
 
+    public Sprite Icon
+    {
+        get
+        {
+            return icon;
+        }
+    }
+
     public void Use()
     {
-        //Player.Instance.CastSpell(Name);
+        Player.Instance.CastSpell(Name);
     }
 }

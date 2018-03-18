@@ -5,27 +5,21 @@ using UnityEngine;
 public class MoveRightCommand : ICommand
 {
     /*
-	 * @param player: Acts as the reciever to this concrete command
-	 */
-    Character player;
-    /*
-	 * MoveRightCommand takes in a character reference to act as the receiver
-	 */
-    public MoveRightCommand(Character player)
-    {
-        this.player = player;
-    }
-    /*
 	 * execute calls the character method to be executed 
 	 */
     public void Execute()
     {
-        player.MoveRight();
+        Player.Instance.MoveRight();
+    }
+
+    public void Execute(string name)
+    {
+        throw new System.NotImplementedException();
     }
 
     public void Undo()
     {
-        player.Stop();
+        Player.Instance.Stop();
     }
 }
 

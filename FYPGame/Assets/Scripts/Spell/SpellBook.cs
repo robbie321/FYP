@@ -19,10 +19,6 @@ public class SpellBook : MonoBehaviour
             return instance;
         }
     }
-    //A reference to the spell name on the casting bar
-    [SerializeField]
-    private string currentSpell;
-    [SerializeField]
     private string spellName;
     //All spells in the spellbook
     [SerializeField]
@@ -30,23 +26,19 @@ public class SpellBook : MonoBehaviour
     //A reference to the coroutine that throws spells
     private Coroutine spellRoutine;
     //Cast a spell at an enemy
-    public Spell CastSpell(int index)
+    public Spell CastSpell(string spellName)
     {
-        spellName = spells[index].Name;
-        //Spell spell = Array.Find(spells, x => x.Name == spellName);
-        //Changes the text on the bar so that we can read what spell we are casting
-        currentSpell = spellName;
-        //Starts casting the spells
-        spellRoutine = StartCoroutine(Progress(index));
+        Spell spell = Array.Find(spells, x => x.Name == spellName);
+        spellRoutine = StartCoroutine(Progress(spell));
         //Returns the spell that we just  cast.
-        return spells[index];
+        return spell;
     }
 
-    private IEnumerator Progress(int index)
+    private IEnumerator Progress(Spell spell)
     {
         //How much time has passed since we started casting the spell
         float timePassed = Time.deltaTime;
-        float rate = 1.0f / spells[index].CastTime;
+        float rate = 1.0f / spell.CastTime;
 
         //The current progress of the cast 
         float progress = 0.0f;
@@ -74,6 +66,7 @@ public class SpellBook : MonoBehaviour
 
     public Spell GetSpell(string spellName)
     {
+        //check for the name of the gameobject and see if matches
         Spell spell = Array.Find(spells, x => x.Name == spellName);
 
         return spell;

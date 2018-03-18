@@ -1,14 +1,18 @@
 ﻿
 public class EscapeButtonCommand : ICommand
 {
-    UIManager controls;
-    public  EscapeButtonCommand(UIManager controls)
+    public EscapeButtonCommand(/*UIManager controls*/)
     {
-        this.controls = controls;
+        //this.controls = controls;
     }
     public void Execute()
     {
-        controls.OpenCloseMenu();
+        UIManager.Instance.OpenCloseMenu();
+    }
+
+    public void Execute(string name)
+    {
+        throw new System.NotImplementedException();
     }
 
     public void Undo()
