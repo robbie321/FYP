@@ -38,7 +38,7 @@ class FollowState : IState
             }
 
         }
-        else
+        if (!parent.InRange)
         {
             parent.ChangeState(new IdleState());
         }

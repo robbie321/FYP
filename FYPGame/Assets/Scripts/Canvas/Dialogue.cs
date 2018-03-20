@@ -8,6 +8,7 @@ public class Dialogue : MonoBehaviour {
     //store lines of text in an array
     public string[] dialogueLines;
     public int currentLine;
+    public int counter = 0;
     //counter for what line were on in game
 
     // Use this for initialization
@@ -22,16 +23,22 @@ public class Dialogue : MonoBehaviour {
             //when player presses space, dialogue moves to next line
             currentLine++;
         }	
+        if(currentLine == 3)
+        {
+            DialogueHolder.Instance.Talked = true;
 
+        }
         if(currentLine>= dialogueLines.Length)
         {
             dialogueBox.SetActive(false);
             dialogueActive = false;
             currentLine = 0;
+            
         }
         if(currentLine < dialogueLines.Length)
         {
             dialogueText.text = dialogueLines[currentLine];
+
         }
         //dialogueText.text = dialogueLines[currentLine];
 	}

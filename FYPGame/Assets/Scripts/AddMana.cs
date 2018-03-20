@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AddMana : MonoBehaviour {
-   // public GameObject effect;
+
+    [SerializeField]
+    private int value;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -17,8 +19,8 @@ public class AddMana : MonoBehaviour {
         //spawn effect
         // Instantiate(effect, transform.position, transform.rotation);
         //apply effect to player
-        Player mana = player.GetComponent<Player>();
-        mana.shield.PlayerCurrentValue += 10;
+       // Player mana = player.GetComponent<Player>();
+        Player.Instance.shield.PlayerCurrentValue += value;
         //remove object
         Destroy(gameObject);
         Debug.Log("Mana + 10");

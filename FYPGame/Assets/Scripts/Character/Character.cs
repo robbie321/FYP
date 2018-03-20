@@ -183,10 +183,6 @@ public abstract class Character : MonoBehaviour
 
     public virtual void TakeDamage(float damage, Transform source)
     {
-        if(Target == null)
-        {
-            Target = source;
-        }
         //reduce health
         health.PlayerCurrentValue -= damage;
         if (health.PlayerCurrentValue <= 0)

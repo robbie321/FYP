@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212987277679297828}
   - component: {fileID: 61146754330563406}
   - component: {fileID: 114589367425519230}
+  - component: {fileID: 95605781003177842}
   m_Layer: 0
   m_Name: potion10mana
   m_TagString: potion
@@ -67,6 +68,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0960366, y: 1.512666}
   m_EdgeRadius: 0
+--- !u!95 &95605781003177842
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1357597534979814}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e31af85528d71044d959a507056773f7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114589367425519230
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -78,6 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a359e76951d54a4181fbd710e1e6ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  value: 10
 --- !u!212 &212987277679297828
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -109,8 +128,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 2109728529
-  m_SortingLayer: 0
+  m_SortingLayerID: 1066657415
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7d782127ea311de42aa2317f744ff3d4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

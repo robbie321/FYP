@@ -13,7 +13,7 @@ class IdleState : IState
     {
         this.parent = parent;
 
-       // this.parent.Reset();
+       this.parent.Target = null;
     }
 
     // This is called whenever we exit the state

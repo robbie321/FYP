@@ -39,8 +39,8 @@ public class KeyboardInput : MonoBehaviour {
     Dictionary<string, ICommand> characterCommands;
     Dictionary<string, ICommand> controlCommands;
 
-    ICommand Command;// { get; set; }
-    KeyCode key;
+    ICommand Command;// { get; set; 
+    string key;
     public KeyboardInput()
     {
         characterCommands = new Dictionary<string, ICommand>();
@@ -64,6 +64,15 @@ public class KeyboardInput : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Alpha5)) ButtonPressed("ACT5");
         if (Input.GetKeyDown(KeyCode.Escape)) ButtonPressed("Escape");
         else if (!Input.anyKey) UndoButtonPressed();
+
+        //foreach(KeyValuePair<string, ICommand> command in controlCommands)
+        //{
+        //    key = command.Key;
+        //    if (Input.GetKeyDown(controlCommands[key]))
+        //    {
+        //        UIManager.Instance.ClickActionButton(key);
+        //    }
+        //}
     }
     /*
 	 * setCommand takes in String "button" which acts an identifier or key in the hashmap

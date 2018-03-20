@@ -17,6 +17,7 @@ public class DeathBehaviour : StateMachineBehaviour {
         if(timePassed >= 3)
         {
             Destroy(animator.gameObject);
+            
         }
     }
 

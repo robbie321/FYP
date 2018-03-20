@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>2017.3.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -290,7 +288,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Buttons\IMoveable.cs" />
     <Compile Include="Assets\_Platerformer_Level_Kit\MoveCam.cs" />
     <Compile Include="Assets\AstarPathfindingProject\Behaviors\AIDestinationSetter.cs" />
     <Compile Include="Assets\AstarPathfindingProject\Behaviors\Patrol.cs" />
@@ -415,12 +412,15 @@
     <Compile Include="Assets\FantasyHeroes\Scripts\SpriteGroupEntry.cs" />
     <Compile Include="Assets\FantasyHeroes\Scripts\SpriteSheetMaker.cs" />
     <Compile Include="Assets\FantasyHeroes\Scripts\WeaponType.cs" />
+    <Compile Include="Assets\MoveToPointB.cs" />
+    <Compile Include="Assets\MoveToSpace.cs" />
     <Compile Include="Assets\Scripts\ActivateObject.cs" />
     <Compile Include="Assets\Scripts\AddMana.cs" />
     <Compile Include="Assets\Scripts\Behaviours\DeathBehaviour.cs" />
     <Compile Include="Assets\Scripts\Behaviours\SpellBehaviour.cs" />
     <Compile Include="Assets\Scripts\Buttons\ActionButtons.cs" />
     <Compile Include="Assets\Scripts\Buttons\HandleButtonClick.cs" />
+    <Compile Include="Assets\Scripts\Buttons\IMoveable.cs" />
     <Compile Include="Assets\Scripts\Buttons\IUseable.cs" />
     <Compile Include="Assets\Scripts\Buttons\SpellButton.cs" />
     <Compile Include="Assets\Scripts\Canvas\Dialogue.cs" />
@@ -448,17 +448,7 @@
     <Compile Include="Assets\Scripts\CommandPattern(Player)\MoveRightCommand.cs" />
     <Compile Include="Assets\Scripts\CommandPattern(Player)\MoveUpCommand.cs" />
     <Compile Include="Assets\Scripts\CommandPattern(Player)\UndoCommand.cs" />
-    <Compile Include="Assets\Scripts\Inventory and items\Apple.cs" />
-    <Compile Include="Assets\Scripts\Inventory and items\ElectricSpell.cs" />
-    <Compile Include="Assets\Scripts\Inventory and items\FireSpell.cs" />
-    <Compile Include="Assets\Scripts\Inventory and items\Inventory.cs" />
-    <Compile Include="Assets\Scripts\Inventory and items\InventoryItem.cs" />
-    <Compile Include="Assets\Scripts\Inventory and items\InventoryItemBase.cs" />
-    <Compile Include="Assets\Scripts\Inventory and items\ItemClickHandler.cs" />
-    <Compile Include="Assets\Scripts\Inventory and items\ItemDragHandler.cs" />
-    <Compile Include="Assets\Scripts\Inventory and items\ItemDropHandler.cs" />
     <Compile Include="Assets\Scripts\Inventory and items\Potion.cs" />
-    <Compile Include="Assets\Scripts\Inventory and items\WaterSpell.cs" />
     <Compile Include="Assets\Scripts\Managers\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Managers\ControlsManager.cs" />
     <Compile Include="Assets\Scripts\Managers\Fading.cs" />

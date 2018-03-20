@@ -9,6 +9,7 @@ public class SpellScript : MonoBehaviour
     private float speed;
 
     public Transform Target { get; private set; }
+    //parent of the spell
     private Transform source;
     private float damage;
     // Use this for initialization
@@ -51,8 +52,10 @@ public class SpellScript : MonoBehaviour
         //can take out if our spell wants to hit any enemy in target direction
         if (collision.tag == "HitBox" && collision.transform == Target)
         {
+            Character character = collision.GetComponentInParent<Character>();
             speed = 0;
-            collision.GetComponentInParent<Enemy>().TakeDamage(10, transform);
+            //collision.GetComponentInParent<Enemy>().TakeDamage(10, transform);
+            character.TakeDamage(damage, source);
             GetComponent<Animator>().SetTrigger("impact");
             myRigidbody.velocity = Vector2.zero;
             Target = null;

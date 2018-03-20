@@ -39,12 +39,12 @@ public class Player : Character, IUseable
     // The player's initial mana
     [SerializeField]
     private float initShield;
-
-    private IInventoryItem mCurrentItem = null;
-
-    private bool mLockPickup = false;
-    //reference to Inventory
-    public Inventory inventory;
+    // The player's mana
+    [SerializeField]
+    public StatBar XP;
+    // The player's initial mana
+    [SerializeField]
+    private float initXP;
     //reference to HUD
     public HUD Hud;
     //exit points for spells
@@ -75,6 +75,7 @@ public class Player : Character, IUseable
         //get the current mana total stored in GameManager.instance between scenes
         //GameManager.instance.playerMana = shield.PlayerCurrentValue;
         shield.Initialize(initShield, 100);
+        XP.Initialize(initXP, 100);
         base.Start();
     }
 

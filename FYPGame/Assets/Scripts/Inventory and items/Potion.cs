@@ -4,13 +4,34 @@ using UnityEngine;
 
 public class Potion : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        private static Potion instance;
+
+        public static Potion Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = FindObjectOfType<Potion>();
+                }
+
+                return instance;
+            }
+        }
+    [SerializeField]
+    private int value = 0;
+
+        public int Value
+        {
+            get
+            {
+                return value;
+            }
+
+            set
+            {
+                this.value = value;
+            }
+        }
+    
 }

@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Enemy : NPC
 {
+    private float spawnRate = .2f;
+    //potion and xp to drop
+    [SerializeField]
+    private GameObject potion;
+    [SerializeField]
+    private ParticleSystem XP;
     /// <summary>
     /// A canvasgroup for the healthbar
     /// </summary>
@@ -15,8 +21,20 @@ public class Enemy : NPC
     private float attackRange;
 
     private float attackTime;
-
+    //initial range
+    [SerializeField]
+    private float initialRange;
+    //Range player must travel
+    public float Range { get; set; }
    
+    public bool InRange
+    {
+        get
+        {
+            //if distance between enemy and player is < the Range, true
+            return Vector2.Distance(transform.position, Target.position) < Range;
+        }
+    }
 
     public float AttackRange
     {
@@ -46,8 +64,8 @@ public class Enemy : NPC
 
     protected void Awake()
     {
- 
-        
+        XP = GetComponent<ParticleSystem>();
+        Range = initialRange;
         AttackRange = 2;
         ChangeState(new IdleState());
     }
@@ -88,7 +106,7 @@ public class Enemy : NPC
     {
         if (!(currentState is EvadeState))
         {
-           // SetTarget(source);
+           SetTarget(source);
 
             base.TakeDamage(damage, source);
 
@@ -106,5 +124,29 @@ public class Enemy : NPC
         }
         currentState = newState;
         currentState.Enter(this);
+    }
+
+    public void SetTarget(Transform target)
+    {
+        if(Target == null)
+        {
+            //calculate distance if enemy doesnt have target
+            float distance = Vector2.Distance(transform.position, target.position);
+            //reset every time a new one is set
+            Range = initialRange;
+            //range is then set on the distance
+            Range += distance;
+            Target = target;
+        }
+    }
+
+    public void OnDestroy()
+    {
+        if(Random.Range(0f,1f) < spawnRate)
+        {
+            Instantiate(potion, transform.position, transform.rotation);
+            
+        }
+        Instantiate(XP, transform.position, transform.rotation);
     }
 }

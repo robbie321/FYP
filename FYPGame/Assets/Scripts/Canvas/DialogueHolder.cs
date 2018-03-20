@@ -3,13 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DialogueHolder : MonoBehaviour {
+    private static DialogueHolder instance;
+
+    public static DialogueHolder Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<DialogueHolder>();
+            }
+
+            return instance;
+        }
+    }
+
+    public bool Talked
+    {
+        get
+        {
+            return talked;
+        }
+
+        set
+        {
+            talked = value;
+        }
+    }
+
     public string dialogue;
     //reference to dialogue
     private Dialogue dm;
     //string array to hold each text line
     public string[] dialogueLines;
-	// Use this for initialization
-	void Start () {
+    [SerializeField]
+    private bool talked = false;
+    // Use this for initialization
+    void Start () {
         dm = FindObjectOfType<Dialogue>();
     }
 	
@@ -32,6 +62,11 @@ public class DialogueHolder : MonoBehaviour {
                     dm.dialogueLines = dialogueLines;
                     dm.currentLine = 0;
                     dm.ShowDialogue();
+
+                }
+                if(dm.counter == dialogueLines.Length)
+                {
+                    talked = true;
                 }
                 //if able to find villager movement script of parent object
                 if(transform.parent.GetComponent<NPC>() != null)
