@@ -25,13 +25,16 @@ public abstract class Character : MonoBehaviour
     //character hitBox for selecting
     [SerializeField]
     protected Transform hitBox;
+    //exit points for spells
+    [SerializeField]
+    private Transform[] exitPoints;
     // The player's initialHealth
     [SerializeField]
     private float initHealth;
     [SerializeField]
     protected StatBar health;
     //index to keep track of what exit point to use, 0 is defaulted as down
-    protected int exitIndex = 0;
+    private int exitIndex = 0;
     private Transform target;
     public Transform Target
     {
@@ -104,6 +107,32 @@ public abstract class Character : MonoBehaviour
         set
         {
             animator = value;
+        }
+    }
+
+    public Transform[] ExitPoints
+    {
+        get
+        {
+            return exitPoints;
+        }
+
+        set
+        {
+            exitPoints = value;
+        }
+    }
+
+    public int ExitIndex
+    {
+        get
+        {
+            return exitIndex;
+        }
+
+        set
+        {
+            exitIndex = value;
         }
     }
 
@@ -200,25 +229,25 @@ public abstract class Character : MonoBehaviour
 
     public void MoveDown()
     {
-        exitIndex = 0;
+        ExitIndex = 0;
         Direction += Vector2.down;
     }
 
     public void MoveLeft()
     {
-        exitIndex = 1;
+        ExitIndex = 1;
         Direction += Vector2.left;
     }
 
     public void MoveRight()
     {
-        exitIndex = 2;
+        ExitIndex = 2;
         Direction += Vector2.right;
     }
 
     public void MoveUp()
     {
-        exitIndex = 3;
+        ExitIndex = 3;
         Direction += Vector2.up;
 
     }

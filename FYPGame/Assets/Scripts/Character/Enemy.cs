@@ -9,7 +9,7 @@ public class Enemy : NPC
     [SerializeField]
     private GameObject potion;
     [SerializeField]
-    private ParticleSystem XP;
+    private GameObject XP;
     /// <summary>
     /// A canvasgroup for the healthbar
     /// </summary>
@@ -64,7 +64,6 @@ public class Enemy : NPC
 
     protected void Awake()
     {
-        XP = GetComponent<ParticleSystem>();
         Range = initialRange;
         AttackRange = 2;
         ChangeState(new IdleState());
@@ -142,11 +141,14 @@ public class Enemy : NPC
 
     public void OnDestroy()
     {
-        if(Random.Range(0f,1f) < spawnRate)
+        for(int i = (Random.Range(0,3)); i <= 6; i++){
+            Instantiate(XP, transform.position, transform.rotation);
+        }
+        if (Random.Range(0f,1f) < spawnRate)
         {
             Instantiate(potion, transform.position, transform.rotation);
             
         }
-        Instantiate(XP, transform.position, transform.rotation);
+        
     }
 }

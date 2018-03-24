@@ -19,6 +19,7 @@ public class StatBar : MonoBehaviour {
     public float MaxValue { get; set; }
     //The currentValue for example the current health or mana
     private float currentValue;
+    private int Level = 1;
     //Property for setting the current value, this has to be used every time we change the
     //currentValue, so that everything updates correctly
     //Used to access currentValue from different scripts
@@ -32,8 +33,14 @@ public class StatBar : MonoBehaviour {
 
         set
         {
-            if (value > MaxValue)//Makes sure that we don't get too much health
+            if (value >= MaxValue)//Makes sure that we don't get too much health
             {
+                if(gameObject.name == "XP")
+                {
+                    currentValue = 0;
+                    MaxValue = MaxValue * 2;
+                    Level++;
+                }else
                 currentValue = MaxValue;
             }
             else if (value < 0) //Makes sure that we don't get health below 0
@@ -47,9 +54,12 @@ public class StatBar : MonoBehaviour {
 
             //Calculates the currentFill, so that we can lerp
             currentFill = currentValue / MaxValue;
-
+            
             if (statValue != null)
             {
+                if (gameObject.name == "XP") {
+                    statValue.text = "Level: " + Level + "    " + currentValue + " / " + MaxValue;
+                }else
                 //Makes sure that we update the value text
                 statValue.text = currentValue + " / " + MaxValue;
 

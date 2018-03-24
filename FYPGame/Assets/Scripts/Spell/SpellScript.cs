@@ -50,7 +50,7 @@ public class SpellScript : MonoBehaviour
     {
         //check if whatever i collide with has the same transform as the target i want to hit
         //can take out if our spell wants to hit any enemy in target direction
-        if (collision.tag == "HitBox" && collision.transform == Target)
+        if (collision.tag == "HitBox" /*&& collision.transform == Target*/)
         {
             Character character = collision.GetComponentInParent<Character>();
             speed = 0;

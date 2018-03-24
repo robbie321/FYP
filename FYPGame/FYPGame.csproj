@@ -412,10 +412,9 @@
     <Compile Include="Assets\FantasyHeroes\Scripts\SpriteGroupEntry.cs" />
     <Compile Include="Assets\FantasyHeroes\Scripts\SpriteSheetMaker.cs" />
     <Compile Include="Assets\FantasyHeroes\Scripts\WeaponType.cs" />
-    <Compile Include="Assets\MoveToPointB.cs" />
-    <Compile Include="Assets\MoveToSpace.cs" />
     <Compile Include="Assets\Scripts\ActivateObject.cs" />
     <Compile Include="Assets\Scripts\AddMana.cs" />
+    <Compile Include="Assets\Scripts\addXP.cs" />
     <Compile Include="Assets\Scripts\Behaviours\DeathBehaviour.cs" />
     <Compile Include="Assets\Scripts\Behaviours\SpellBehaviour.cs" />
     <Compile Include="Assets\Scripts\Buttons\ActionButtons.cs" />
@@ -459,6 +458,8 @@
     <Compile Include="Assets\Scripts\Managers\Sound.cs" />
     <Compile Include="Assets\Scripts\Managers\UIManager.cs" />
     <Compile Include="Assets\Scripts\Managers\WaveSpawner.cs" />
+    <Compile Include="Assets\Scripts\MoveToPointB.cs" />
+    <Compile Include="Assets\Scripts\MoveToSpace.cs" />
     <Compile Include="Assets\Scripts\Objectives\ObjectiveManager.cs" />
     <Compile Include="Assets\Scripts\Objectives\ObjectiveObject.cs" />
     <Compile Include="Assets\Scripts\Objectives\ObjectiveTrigger.cs" />

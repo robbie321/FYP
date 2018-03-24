@@ -44,12 +44,9 @@ public class Player : Character, IUseable
     public StatBar XP;
     // The player's initial mana
     [SerializeField]
-    private float initXP;
+    public float initXP;
     //reference to HUD
     public HUD Hud;
-    //exit points for spells
-    [SerializeField]
-    private Transform[] exitPoints;
     //The players sight block
     [SerializeField]
     private SightBlock[] sightBlocks;
@@ -112,7 +109,7 @@ public class Player : Character, IUseable
         //set the players target
         if (currentTarget != null && RaycastSight())
         {
-            SpellScript spell = Instantiate(newSpell.SpellPrefab, exitPoints[exitIndex].position, Quaternion.identity).GetComponent<SpellScript>();
+            SpellScript spell = Instantiate(newSpell.SpellPrefab, ExitPoints[ExitIndex].position, Quaternion.identity).GetComponent<SpellScript>();
             //set spell target to players target
             spell.Initialize(currentTarget, newSpell.Damage, transform);
             shield.PlayerCurrentValue -= 5;
@@ -164,7 +161,7 @@ public class Player : Character, IUseable
         }
         //exit index keeps track of where we are facing
         //based on direction it will enable the blocks for that direction
-        sightBlocks[exitIndex].ActivateBlock();
+        sightBlocks[ExitIndex].ActivateBlock();
     }
 
     // Stops the attack

@@ -21,7 +21,7 @@ class FollowState : IState
     public void Update()
     {
         Debug.Log("Follow");
-
+        GetFloat();
         if (parent.Target != null)//As long as we have a target, then we need to keep moving
         {
             //Find the target's direction
@@ -47,5 +47,17 @@ class FollowState : IState
             parent.ChangeState(new EvadeState());
         } //if we don't have a target, then we need to go back to idle.
         */
+    }
+
+    void GetFloat()
+    {
+
+        Debug.Log(parent.Animator.GetFloat("x"));
+        if (parent.Animator.GetFloat("x") < 0)
+        {
+            parent.ExitIndex = 0;
+        }
+        else
+            parent.ExitIndex = 1;
     }
 }

@@ -58,11 +58,16 @@ public class AttackState : IState
     // Makes the enemy attack the player
     public IEnumerator Attack()
     {
+        Spell newSpell = SpellBook.MyInstance.CastSpell("Fire");
+        Transform currentTarget = parent.Target;
         parent.IsAttacking = true;
 
         parent.Animator.SetTrigger("attack");
         //gets attack layer from animator(2)
         yield return new WaitForSeconds(parent.Animator.GetCurrentAnimatorStateInfo(2).length);
+        SpellScript spell = GameObject.Instantiate(newSpell.SpellPrefab, parent.ExitPoints[parent.ExitIndex].position, Quaternion.identity).GetComponent<SpellScript>() as SpellScript;
+        //set spell target to players target
+        spell.Initialize(currentTarget, newSpell.Damage, parent.transform);
 
         parent.IsAttacking = false;
     }
