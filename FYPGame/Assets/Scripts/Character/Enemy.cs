@@ -141,8 +141,12 @@ public class Enemy : NPC
 
     public void OnDestroy()
     {
-        for(int i = (Random.Range(0,3)); i <= 6; i++){
-            Instantiate(XP, transform.position, transform.rotation);
+        Vector3 newX = transform.position;
+        newX.x = transform.position.x;
+
+        for(int i = (Random.Range(0,3)); i < 3; i++){
+            Instantiate(XP, newX, transform.rotation);
+            newX.x = newX.x + 0.2f;
         }
         if (Random.Range(0f,1f) < spawnRate)
         {
