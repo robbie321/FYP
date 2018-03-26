@@ -32,7 +32,9 @@ public class StatBar : MonoBehaviour {
     public float MaxValue { get; set; }
     //The currentValue for example the current health or mana
     private float currentValue;
-    private int Level = 1;
+    private float currentXP;
+    private int currentLevel;
+    //private float totalXP;
     //Property for setting the current value, this has to be used every time we change the
     //currentValue, so that everything updates correctly
     //Used to access currentValue from different scripts
@@ -52,7 +54,7 @@ public class StatBar : MonoBehaviour {
                 {
                     currentValue = 0;
                     MaxValue = MaxValue * 2;
-                    Level++;
+                    currentLevel++;
                 }else
                 currentValue = MaxValue;
             }
@@ -71,8 +73,9 @@ public class StatBar : MonoBehaviour {
             if (statValue != null)
             {
                 if (gameObject.name == "XP") {
-                    statValue.text = "Level: " + Level + "    " + currentValue + " / " + MaxValue;
-                }else
+                    statValue.text = "Level: " + currentLevel + "    " + currentValue + " / " + MaxValue + "  ";
+                }
+                else
                 //Makes sure that we update the value text
                 statValue.text = currentValue + " / " + MaxValue;
 
@@ -81,7 +84,7 @@ public class StatBar : MonoBehaviour {
 
         }
     }
-    
+
     void Start()
     {
         //Creates a reference to the content

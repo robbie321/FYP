@@ -46,16 +46,14 @@ public class UIManager : MonoBehaviour {
         }
     }
 
-    //characterCommands is a list of set commands	 
-    //Dictionary<string, ICommand> characterCommands;
-    //Dictionary<string, ICommand> controlCommands;
-    //ICommand Command;
     [SerializeField]
     private ActionButtons[] actionButtons;
     [SerializeField]
     private CanvasGroup controls;
     [SerializeField]
     private CanvasGroup spells;
+    [SerializeField]
+    private CanvasGroup instructions;
     /// <summary>
     /// A reference to all the kibind buttons on the menu
     /// </summary>
@@ -69,9 +67,6 @@ public class UIManager : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
-        //SetUseable(actionButtons[0], SpellBook.MyInstance.GetSpell("Lightning"));
-        //SetUseable(actionButtons[1], SpellBook.MyInstance.GetSpell("Fire"));
-        //SetUseable(actionButtons[2], SpellBook.MyInstance.GetSpell("Ice Blast"));
 
     }
 	

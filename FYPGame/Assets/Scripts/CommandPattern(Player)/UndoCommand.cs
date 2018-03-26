@@ -18,7 +18,6 @@ public class UndoCommand : ICommand
 
     public void Execute(string name)
     {
-        throw new NotImplementedException();
     }
 
     public void Undo()

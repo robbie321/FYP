@@ -114,7 +114,6 @@ public class KeyboardInput : MonoBehaviour {
     {
         if(Command == null)
         {
-            Debug.Log("Command not set");
         }
         else
         {

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
@@ -45,6 +46,9 @@ public class Player : Character, IUseable
     // The player's initial mana
     [SerializeField]
     public float initXP;
+    public float totalXP;
+    [SerializeField]
+    private Text XPValue;
     //reference to HUD
     public HUD Hud;
     //The players sight block
@@ -68,10 +72,6 @@ public class Player : Character, IUseable
     protected override void Start()
     {
         PlayerPrefs.SetFloat("Health", health.PlayerCurrentValue);
-        //get the current health total stored in GameManager.instance between scenes
-        //GameManager.instance.playerHealth = health.PlayerCurrentValue;
-        //get the current mana total stored in GameManager.instance between scenes
-        //GameManager.instance.playerMana = shield.PlayerCurrentValue;
         shield.Initialize(initShield, 100);
         XP.Initialize(initXP, 100);
         base.Start();
@@ -80,8 +80,7 @@ public class Player : Character, IUseable
     // We are overriding the characters update function, so that we can execute our own functions
     protected override void Update()
     {
-        //Executes the GetInput function
-        //GetInput();
+        XPValue.text = " "+totalXP;
         //Clamps the player inside the tilemap
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, min.x, max.x),
         Mathf.Clamp(transform.position.y, min.y + 4, max.y),

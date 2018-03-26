@@ -14,7 +14,7 @@ public class SpellButton : MonoBehaviour, IPointerClickHandler
     int value;
     void Start()
     {
-        image = gameObject.GetComponentInParent<Image>();
+        image = transform.parent.gameObject.GetComponentInParent<Image>();
         spell = SpellBook.MyInstance.GetSpell(spellName);
     }
     void Update()
@@ -46,11 +46,12 @@ public class SpellButton : MonoBehaviour, IPointerClickHandler
 
     public void UseXP()
     {
-        if(Player.Instance.XP.PlayerCurrentValue > value)
+        if(Player.Instance.totalXP >= value)
         {
-            Player.Instance.XP.PlayerCurrentValue -= value;
+            Player.Instance.totalXP -= value;
             spell.Unlocked = true;
-           // gameObject.GetComponentInParent<Button>().gam.SetActive(false);
+            Transform t = gameObject.transform.GetChild(2);
+            t.gameObject.SetActive(false);
         }
     }
 
