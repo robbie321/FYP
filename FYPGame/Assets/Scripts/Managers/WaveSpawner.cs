@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class WaveSpawner : MonoBehaviour {
 
-	public enum SpawnState { SPAWNING, WAITING, COUNTING };
+	public enum SpawnState { SPAWNING, WAITING, COUNTING, ENEDED };
 
 	[System.Serializable]
 	public class Wave
@@ -70,42 +70,32 @@ public class WaveSpawner : MonoBehaviour {
 				StartCoroutine( SpawnWave ( waves[nextWave] ) );
 			}
 		}
+        if(state == SpawnState.ENEDED)
+        {
+            Destroy(this);
+        }
 		else
 		{
-            StartCoroutine(Timer());
             countDownText.gameObject.SetActive(true);
             countDownText.text = ("Fight\n" + waveCountdown.ToString("0"));
-            if(waveCountdown < 0.1f)
+            waveCountdown -= Time.deltaTime;
+            if (waveCountdown < 0.1f)
             {
-                StopCoroutine(Timer());
                 countDownText.gameObject.SetActive(false);
             }
-           // StartCoroutine(Timer());
-			//waveCountdown -= Time.deltaTime;
 		}
 	}
-
-    IEnumerator Timer()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(1);
-           waveCountdown-= Time.deltaTime;
-        }
-        
-    }
 
 	void WaveCompleted()
 	{
 		Debug.Log("Wave Completed!");
 
-		//state = SpawnState.COUNTING;
         state = SpawnState.COUNTING;
         waveCountdown = timeBetweenWaves;
-
         if (nextWave + 1 > waves.Length - 1)
         {
-            nextWave++;
+            state = SpawnState.ENEDED;
+
             Debug.Log("ALL WAVES COMPLETE! Looping...");
         }
         else

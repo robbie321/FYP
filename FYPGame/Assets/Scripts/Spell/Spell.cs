@@ -22,11 +22,12 @@ public class Spell : IUseable, IMoveable
     // The spell's prefab
     [SerializeField]
     private GameObject spellPrefab;
-    /// <summary>
-    /// The spell's icon
-    /// </summary>
+    //The spell's icon
     [SerializeField]
     private Sprite icon;
+    //unlocked?
+    [SerializeField]
+    private bool unlocked;
     // Property for accessing the spell's name
     public string Name
     {
@@ -75,6 +76,19 @@ public class Spell : IUseable, IMoveable
         get
         {
             return icon;
+        }
+    }
+
+    public bool Unlocked
+    {
+        get
+        {
+            return unlocked;
+        }
+
+        set
+        {
+            unlocked = value;
         }
     }
 

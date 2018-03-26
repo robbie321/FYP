@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class NPC : Character
 {
-   
+    private IState currentState;
+    public virtual void ChangeState(IState newState)
+    {
+        Debug.Log("Changing State");
+    }
 
     public virtual void DeSelect()
     {

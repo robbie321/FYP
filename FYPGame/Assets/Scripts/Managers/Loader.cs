@@ -8,6 +8,7 @@ public class Loader : MonoBehaviour
     public GameObject soundManager;         //SoundManager prefab to instantiate.
     public GameObject UiManager;
     public GameObject InputManager;
+    public GameObject headsUpDisplay;
 
 
     void Awake()
@@ -33,5 +34,10 @@ public class Loader : MonoBehaviour
 
             //Instantiate SoundManager prefab
             Instantiate(InputManager);
+        ////Check if a SoundManager has already been assigned to static variable GameManager.instance or if it's still null
+        //if (HUD.instance == null)
+
+        //    //Instantiate SoundManager prefab
+        //    Instantiate(headsUpDisplay);
     }
 }

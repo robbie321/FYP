@@ -108,13 +108,11 @@ public class Enemy : NPC
            SetTarget(source);
 
             base.TakeDamage(damage, source);
-
-           // OnHealthChanged(health.MyCurrentValue);
         }
 
     }
 
-    public void ChangeState(IState newState)
+    public override void ChangeState(IState newState)
     {
          
         if(currentState != null)

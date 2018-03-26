@@ -45,7 +45,7 @@ public class DialogueHolder : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        IsActive();
 	}
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -64,7 +64,7 @@ public class DialogueHolder : MonoBehaviour {
                     dm.ShowDialogue();
 
                 }
-                if(dm.counter == dialogueLines.Length)
+                if(dm.counter == dialogueLines.Length-1)
                 {
                     talked = true;
                 }
@@ -75,5 +75,15 @@ public class DialogueHolder : MonoBehaviour {
                 }
             }
         }
+    }
+
+    void IsActive()
+    {
+        if (Talked && gameObject.activeSelf)
+        {
+            gameObject.SetActive(false);
+        }
+        else
+            gameObject.SetActive(true);
     }
 }

@@ -67,6 +67,7 @@ public class Player : Character, IUseable
     }
     protected override void Start()
     {
+        PlayerPrefs.SetFloat("Health", health.PlayerCurrentValue);
         //get the current health total stored in GameManager.instance between scenes
         //GameManager.instance.playerHealth = health.PlayerCurrentValue;
         //get the current mana total stored in GameManager.instance between scenes
@@ -79,7 +80,6 @@ public class Player : Character, IUseable
     // We are overriding the characters update function, so that we can execute our own functions
     protected override void Update()
     {
-        
         //Executes the GetInput function
         //GetInput();
         //Clamps the player inside the tilemap

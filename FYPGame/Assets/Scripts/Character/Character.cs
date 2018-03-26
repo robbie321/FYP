@@ -10,7 +10,7 @@ public abstract class Character : MonoBehaviour
 {
     //The Player's movement speed
     [SerializeField]
-    private float speed;
+    protected float speed;
     // A reference to the character's animator
     private Animator animator;
     //The Player's direction
@@ -138,6 +138,7 @@ public abstract class Character : MonoBehaviour
 
     protected virtual void Start()
     {
+
         //Makes a reference to the rigidbody2D
         myRigidbody = GetComponent<Rigidbody2D>();
 
