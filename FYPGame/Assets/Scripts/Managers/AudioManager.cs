@@ -2,22 +2,11 @@
 using System;
 using UnityEngine;
 //have a list of sounds that can easily be added or removed sounds
-public class AudioManager : MonoBehaviour {
+public class AudioManager : Singleton<AudioManager>
+{
     public Sound[] sounds;
-    public static AudioManager instance;
 	// Use this for initialization
-	void Awake () {
-        /*
-         only want one instance of audio manager so sounds dont ccut off 
-         between scenes and restart
-         */
-        if (instance == null)
-            instance = this;
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
+	public void Awake () {
         DontDestroyOnLoad(gameObject);
 		foreach(Sound s in sounds)
         {

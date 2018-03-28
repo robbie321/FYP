@@ -98,7 +98,7 @@ public class Player : Character, IUseable
     // A co routine for attacking
     private IEnumerator Attack(string spellName)
     {
-        Spell newSpell = SpellBook.MyInstance.CastSpell(spellName);
+        Spell newSpell = SpellBook.Instance.CastSpell(spellName);
         Transform currentTarget = Target;
         IsAttacking = true; //Indicates if we are attacking
 

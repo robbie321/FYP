@@ -64,9 +64,16 @@ public class Enemy : NPC
 
     protected void Awake()
     {
+
         Range = initialRange;
         AttackRange = 2;
         ChangeState(new IdleState());
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        NPCID = 0;
     }
 
     protected override void Update()
@@ -141,7 +148,7 @@ public class Enemy : NPC
     {
         Vector3 newX = transform.position;
         newX.x = transform.position.x;
-
+        CombatEvents.EnemyDied(this);
         for(int i = (Random.Range(0,3)); i < 3; i++){
             Instantiate(XP, newX, transform.rotation);
             newX.x = newX.x + 0.2f;

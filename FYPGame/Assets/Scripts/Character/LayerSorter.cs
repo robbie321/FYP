@@ -4,14 +4,10 @@ using UnityEngine;
 
 public class LayerSorter : MonoBehaviour
 {
-    /// <summary>
-    /// A reference to the players spriteRenderer
-    /// </summary>
+    // A reference to the players spriteRenderer
     private SpriteRenderer parentRenderer;
-
     //A list of all obstacles that the player is colliding with
     private List<Obstacle> obstacles = new List<Obstacle>();
-
 	// Use this for initialization
 	void Start ()
     {
@@ -19,17 +15,13 @@ public class LayerSorter : MonoBehaviour
         parentRenderer = transform.parent.GetComponent<SpriteRenderer>();
 	}
 	
-    /// <summary>
-    /// When the player hits an obstacle
-    /// </summary>
-    /// <param name="collision"></param>
+    // When the player hits an obstacle
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Obstacle") //If we hit an obstacle
         {
             //Creates a reference to the obstacle
             Obstacle o = collision.GetComponent<Obstacle>();
-
             //Fades out the tree, so that we can see the player beheind it
             o.FadeOut();
             //If we aren't colliding with anything else or we are colliding with something with a less sort order
@@ -44,11 +36,7 @@ public class LayerSorter : MonoBehaviour
         }
         
     }
-
-    /// <summary>
-    /// When we stop colliding with an obstacle
-    /// </summary>
-    /// <param name="collision"></param>
+    //When we stop colliding with an obstacle
     private void OnTriggerExit2D(Collider2D collision)
     {
         //If we stopped colliding with an obstacle

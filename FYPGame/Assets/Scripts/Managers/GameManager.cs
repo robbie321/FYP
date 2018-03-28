@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    public static GameManager instance = null;
+    //public static GameManager instance = null;
     private MoveUpCommand up;
     private MoveLeftCommand left;
     private MoveDownCommand down;
@@ -15,17 +15,10 @@ public class GameManager : MonoBehaviour
     private ActionButtonFour actionButtonFour;
     private ActionButtonFive actionButtonFive;
     private EButtonCommand openCloseBook;
+    private TabButtonCommand openCloseQuests;
     private NPC currentTarget;
     private void Awake()
     {
-
-        if (instance == null)
-            instance = this;
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
         DontDestroyOnLoad(gameObject);
 
     }
@@ -95,6 +88,7 @@ public class GameManager : MonoBehaviour
         actionButtonFour =  new ActionButtonFour();
         actionButtonFive = new ActionButtonFive();
         openCloseBook = new EButtonCommand();
+        openCloseQuests = new TabButtonCommand();
     }
 
 
@@ -112,6 +106,7 @@ public class GameManager : MonoBehaviour
         KeyboardInput.Instance.SetCommand("ACT3", actionButtonThree);
         KeyboardInput.Instance.SetCommand("ACT4", actionButtonFour);
         KeyboardInput.Instance.SetCommand("ACT5", actionButtonFive);
+        KeyboardInput.Instance.SetCommand("Tab", openCloseQuests);
 
 
     }

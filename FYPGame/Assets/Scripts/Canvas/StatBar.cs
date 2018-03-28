@@ -3,21 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StatBar : MonoBehaviour {
-    private static StatBar instance;
-
-    public static StatBar MyInstance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = FindObjectOfType<StatBar>();
-            }
-
-            return instance;
-        }
-    }
+public class StatBar : Singleton<StatBar>
+{
     // The actual image that we are chaing the fill of
     private Image content;
     // A reference to the value text on the bar

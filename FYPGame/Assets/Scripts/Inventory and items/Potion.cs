@@ -2,36 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Potion : MonoBehaviour {
-
-        private static Potion instance;
-
-        public static Potion Instance
+public class Potion : Item{
+    public override void Use()
+    {
+       if(Player.Instance.shield.PlayerCurrentValue < Player.Instance.shield.MaxValue)
         {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = FindObjectOfType<Potion>();
-                }
+            Player.Instance.shield.PlayerCurrentValue += value;
 
-                return instance;
-            }
         }
-    [SerializeField]
-    private int value = 0;
-
-        public int Value
-        {
-            get
-            {
-                return value;
-            }
-
-            set
-            {
-                this.value = value;
-            }
-        }
-    
+        Destroy(gameObject);
+    }
 }

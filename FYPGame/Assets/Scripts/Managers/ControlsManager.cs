@@ -3,37 +3,15 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControlsManager : MonoBehaviour {
+public class ControlsManager : Singleton<ControlsManager>
+{
 
-    private static ControlsManager instance;
-
-    public static ControlsManager Instance
-    {
-        get
-        {
-            if(instance == null)
-            {
-                instance = FindObjectOfType<ControlsManager>();
-            }
-            return instance;
-        }
-    }
-
-    /// <summary>
-    /// A dictionary for all movement keybinds
-    /// </summary>
+    // A dictionary for all movement keybind
     public Dictionary<string, KeyCode> Keybinds { get; private set; }
-
-    /// <summary>
-    /// A dictionary for all actionKeybinds
-    /// </summary>
+    // A dictionary for all actionKeybinds
     public Dictionary<string, KeyCode> ActionBinds { get; private set; }
-
-    /// <summary>
-    /// The name of the keybind we are trying to set or change
-    /// </summary>
+    // The name of the keybind we are trying to set or change
     public string bindName;
-
     // Use this for initialization
     void Start()
     {
@@ -54,11 +32,7 @@ public class ControlsManager : MonoBehaviour {
         BindKey("ACT5", KeyCode.Alpha5);
     }
 
-    /// <summary>
-    /// Binds a specific key
-    /// </summary>
-    /// <param name="key">Key to bind</param>
-    /// <param name="keyBind">Keybind to set</param>
+    // Binds a specific key
     public void BindKey(string key, KeyCode keyBind)
     {
         //Sets the default dictionary to the keybinds

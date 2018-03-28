@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class addXP : MonoBehaviour {
+public class XP : MonoBehaviour, IItem {
 
     [SerializeField]
     private int value;
@@ -10,15 +10,13 @@ public class addXP : MonoBehaviour {
     {
         if (collision.CompareTag("Player"))
         {
-            XPUp(collision);
+            Use();
         }
     }
-
-    void XPUp(Collider2D player)
+    public void Use()
     {
         Player.Instance.XP.PlayerCurrentValue += value;
-        Player.Instance.totalXP += value;
-        //remove object
         Destroy(gameObject);
     }
+
 }

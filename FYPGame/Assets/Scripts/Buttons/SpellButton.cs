@@ -15,7 +15,7 @@ public class SpellButton : MonoBehaviour, IPointerClickHandler
     void Start()
     {
         image = transform.parent.gameObject.GetComponentInParent<Image>();
-        spell = SpellBook.MyInstance.GetSpell(spellName);
+        spell = SpellBook.Instance.GetSpell(spellName);
     }
     void Update()
     {
@@ -28,7 +28,7 @@ public class SpellButton : MonoBehaviour, IPointerClickHandler
         {
             //pick up the spell
             //returns spell to handlebuttonclick TakeMoveable
-            HandleButtonClick.MyInstance.TakeMoveable(SpellBook.MyInstance.GetSpell(spellName));
+            HandleButtonClick.MyInstance.TakeMoveable(SpellBook.Instance.GetSpell(spellName));
         }
     }
     public void UnlockSpell()

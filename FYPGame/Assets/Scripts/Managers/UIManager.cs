@@ -4,21 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour {
-    private static UIManager instance;
-
-    public static UIManager Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = FindObjectOfType<UIManager>();
-            }
-
-            return instance;
-        }
-    }
+public class UIManager : Singleton<UIManager> {
 
     public CanvasGroup Controls
     {
@@ -46,6 +32,19 @@ public class UIManager : MonoBehaviour {
         }
     }
 
+    public CanvasGroup Quests
+    {
+        get
+        {
+            return quests;
+        }
+
+        set
+        {
+            quests = value;
+        }
+    }
+
     [SerializeField]
     private ActionButtons[] actionButtons;
     [SerializeField]
@@ -53,15 +52,14 @@ public class UIManager : MonoBehaviour {
     [SerializeField]
     private CanvasGroup spells;
     [SerializeField]
-    private CanvasGroup instructions;
-    /// <summary>
-    /// A reference to all the kibind buttons on the menu
-    /// </summary>
+    private CanvasGroup quests;
+    //A reference to all the kibind buttons on the menu
     private GameObject[] keybindButtons;
+    public delegate void ItemEventHandler(Item item);
+    public static event ItemEventHandler OnItemEquipped;
     private void Awake()
     {
-        //characterCommands = new Dictionary<string, ICommand>();
-        //controlCommands = new Dictionary<string, ICommand>();
+        DontDestroyOnLoad(gameObject);
         keybindButtons = GameObject.FindGameObjectsWithTag("Control");
        
     }
@@ -96,6 +94,11 @@ public class UIManager : MonoBehaviour {
         Array.Find(actionButtons, x => x.gameObject.name == name).Button.onClick.Invoke();
     }
 
+    public static void ItemEquipped(Item item)
+    {
+        if (OnItemEquipped != null)
+            OnItemEquipped(item);
+    }
 
 
 }

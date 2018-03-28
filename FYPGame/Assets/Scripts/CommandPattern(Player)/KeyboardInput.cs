@@ -2,35 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KeyboardInput : MonoBehaviour {
-    /*
- * Keyboard_input acts as the invoker in the command pattern
- * it 
- */
-    private static KeyboardInput instance;
-
-    public static KeyboardInput Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = FindObjectOfType<KeyboardInput>();
-            }
-
-            return instance;
-        }
-    }
+public class KeyboardInput : Singleton<KeyboardInput>
+{
     private void Awake()
     {
-
-        if (instance == null)
-            instance = this;
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
         DontDestroyOnLoad(gameObject);
 
     }
@@ -46,10 +21,10 @@ public class KeyboardInput : MonoBehaviour {
         characterCommands = new Dictionary<string, ICommand>();
         controlCommands = new Dictionary<string, ICommand>();
     }
-    /*
-	 * handle_input is called to determine button clicks and execute the corresponding command
-	 * from the command set.
-	 */
+
+   	  //handle_input is called to determine button clicks and execute the corresponding command
+	  //from the command set.
+
     public void HandleInput()
     {
         if (Input.GetKeyDown(KeyCode.W)) ButtonPressed("W");
@@ -63,6 +38,7 @@ public class KeyboardInput : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Alpha4)) ButtonPressed("ACT4");
         if (Input.GetKeyDown(KeyCode.Alpha5)) ButtonPressed("ACT5");
         if (Input.GetKeyDown(KeyCode.Escape)) ButtonPressed("Escape");
+        if (Input.GetKeyDown(KeyCode.Tab)) ButtonPressed("Tab");
         else if (!Input.anyKey) UndoButtonPressed();
 
         //foreach(KeyValuePair<string, ICommand> command in controlCommands)
@@ -74,10 +50,10 @@ public class KeyboardInput : MonoBehaviour {
         //    }
         //}
     }
-    /*
-	 * setCommand takes in String "button" which acts an identifier or key in the hashmap
-	 * and command acts as the corresponding value in the hashmap to that string argument passed.
-	 */
+
+	 // setCommand takes in String "button" which acts an identifier or key in the hashmap
+	 // and command acts as the corresponding value in the hashmap to that string argument passed.
+
     public void SetCommand(string button, ICommand command)
     {
         if (button.Contains("ACT"))
@@ -89,10 +65,10 @@ public class KeyboardInput : MonoBehaviour {
     }
    
 
-    /*
-	 * buttonPressed takes in a string argument, which is the key value in the hashmap
-	 * it then takes this string value and executes the corresponding command stored in the hashmap.
-	 */
+
+	 // buttonPressed takes in a string argument, which is the key value in the hashmap
+	 // it then takes this string value and executes the corresponding command stored in the hashmap.
+
     public void ButtonPressed(string button)
     {
         if (button.Contains("ACT"))

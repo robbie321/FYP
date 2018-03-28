@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ActivateObject : MonoBehaviour {
     Transform t;
-   // GameObject go;
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))

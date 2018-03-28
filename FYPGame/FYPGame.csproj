@@ -301,6 +301,7 @@
     <Compile Include="Assets\FantasyHeroes\Scripts\SpriteGroupEntry.cs" />
     <Compile Include="Assets\FantasyHeroes\Scripts\SpriteSheetMaker.cs" />
     <Compile Include="Assets\FantasyHeroes\Scripts\WeaponType.cs" />
+    <Compile Include="Assets\QuestDisplayUI.cs" />
     <Compile Include="Assets\Scripts\ActivateObject.cs" />
     <Compile Include="Assets\Scripts\AddMana.cs" />
     <Compile Include="Assets\Scripts\addXP.cs" />
@@ -317,6 +318,7 @@
     <Compile Include="Assets\Scripts\Canvas\StatBar.cs" />
     <Compile Include="Assets\Scripts\Character\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Character\Character.cs" />
+    <Compile Include="Assets\Scripts\Character\CombatEvent.cs" />
     <Compile Include="Assets\Scripts\Character\Enemy.cs" />
     <Compile Include="Assets\Scripts\Character\LayerSorter.cs" />
     <Compile Include="Assets\Scripts\Character\NPC.cs" />
@@ -336,10 +338,15 @@
     <Compile Include="Assets\Scripts\CommandPattern(Player)\MoveLeftCommand.cs" />
     <Compile Include="Assets\Scripts\CommandPattern(Player)\MoveRightCommand.cs" />
     <Compile Include="Assets\Scripts\CommandPattern(Player)\MoveUpCommand.cs" />
+    <Compile Include="Assets\Scripts\CommandPattern(Player)\TabButtonCommand.cs" />
     <Compile Include="Assets\Scripts\CommandPattern(Player)\UndoCommand.cs" />
+    <Compile Include="Assets\Scripts\Inventory and items\IItem.cs" />
+    <Compile Include="Assets\Scripts\Inventory and items\Item.cs" />
     <Compile Include="Assets\Scripts\Inventory and items\Potion.cs" />
+    <Compile Include="Assets\Scripts\Inventory and items\XPItem.cs" />
     <Compile Include="Assets\Scripts\Managers\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Managers\ControlsManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\DialogueManager.cs" />
     <Compile Include="Assets\Scripts\Managers\Fading.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Managers\LevelManager.cs" />
@@ -353,7 +360,15 @@
     <Compile Include="Assets\Scripts\Objectives\ObjectiveManager.cs" />
     <Compile Include="Assets\Scripts\Objectives\ObjectiveObject.cs" />
     <Compile Include="Assets\Scripts\Objectives\ObjectiveTrigger.cs" />
+    <Compile Include="Assets\Scripts\Quests\CollectionGoal.cs" />
+    <Compile Include="Assets\Scripts\Quests\Goal.cs" />
+    <Compile Include="Assets\Scripts\Quests\Goals\EnemyKilling.cs" />
+    <Compile Include="Assets\Scripts\Quests\KillEnemyGoal.cs" />
+    <Compile Include="Assets\Scripts\Quests\Quest.cs" />
+    <Compile Include="Assets\Scripts\Quests\QuestGiver.cs" />
     <Compile Include="Assets\Scripts\SceneSetUpManager.cs" />
+    <Compile Include="Assets\Scripts\Singleton\Singleton.cs" />
+    <Compile Include="Assets\Scripts\Sounds\ButtonClick.cs" />
     <Compile Include="Assets\Scripts\Spell\SightBlock.cs" />
     <Compile Include="Assets\Scripts\Spell\Spell.cs" />
     <Compile Include="Assets\Scripts\Spell\SpellBook.cs" />
@@ -365,7 +380,6 @@
     <Compile Include="Assets\Scripts\StatePattern(Enemy)\IState.cs" />
     <Compile Include="Assets\Scripts\Tile Scripts\Obstacle.cs" />
     <Compile Include="Assets\Scripts\Tile Scripts\TreeTile.cs" />
-    <Compile Include="Assets\Sprites\UI\ButtonClick.cs" />
     <Compile Include="Assets\UnlockItem.cs" />
   </ItemGroup>
   <ItemGroup>

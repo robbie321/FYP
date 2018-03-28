@@ -2,21 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueHolder : MonoBehaviour {
-    private static DialogueHolder instance;
-
-    public static DialogueHolder Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = FindObjectOfType<DialogueHolder>();
-            }
-
-            return instance;
-        }
-    }
+public class DialogueHolder : Singleton<DialogueHolder>
+{
 
     public bool Talked
     {
@@ -39,6 +26,10 @@ public class DialogueHolder : MonoBehaviour {
     [SerializeField]
     private bool talked = false;
     // Use this for initialization
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
     void Start () {
         dm = FindObjectOfType<Dialogue>();
     }
@@ -47,7 +38,6 @@ public class DialogueHolder : MonoBehaviour {
 	void Update () {
         IsActive();
 	}
-
     private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.gameObject.name == "Player")

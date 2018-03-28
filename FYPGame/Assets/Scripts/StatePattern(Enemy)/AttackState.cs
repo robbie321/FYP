@@ -58,7 +58,7 @@ public class AttackState : IState
     // Makes the enemy attack the player
     public IEnumerator Attack()
     {
-        Spell newSpell = SpellBook.MyInstance.CastSpell("Fire");
+        Spell newSpell = SpellBook.Instance.CastSpell("Fire");
         Transform currentTarget = parent.Target;
         parent.IsAttacking = true;
 

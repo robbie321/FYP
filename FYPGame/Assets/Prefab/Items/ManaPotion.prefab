@@ -21,10 +21,10 @@ GameObject:
   - component: {fileID: 4767718155685468}
   - component: {fileID: 212158832267517844}
   - component: {fileID: 95451893336577542}
-  - component: {fileID: 114855668018431112}
   - component: {fileID: 61285661439685638}
+  - component: {fileID: 114030113624023692}
   m_Layer: 0
-  m_Name: potion20mana
+  m_Name: ManaPotion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,7 +85,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114855668018431112
+--- !u!114 &114030113624023692
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -93,9 +93,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1340620266053834}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a359e76951d54a4181fbd710e1e6ea0, type: 3}
+  m_Script: {fileID: 11500000, guid: 455448604287e8f4786d56019c15ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: ManaPotion
   value: 20
 --- !u!212 &212158832267517844
 SpriteRenderer:

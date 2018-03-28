@@ -3,22 +3,8 @@ using System.Collections;
 using UnityEngine;
 
 
-public class SpellBook : MonoBehaviour
+public class SpellBook : Singleton<SpellBook>
 {
-    private static SpellBook instance;
-
-    public static SpellBook MyInstance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = FindObjectOfType<SpellBook>();
-            }
-
-            return instance;
-        }
-    }
     private string spellName;
     //All spells in the spellbook
     [SerializeField]
