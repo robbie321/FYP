@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class MainMenuButtonManager : MonoBehaviour {
+public class MainMenuButtonManager : Singleton<MainMenuButtonManager> {
 
     public void NewGameButton(string newGameLevel)
     {

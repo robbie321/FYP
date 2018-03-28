@@ -19,4 +19,12 @@ public class EnemyKilling : Quest {
         Goals.ForEach(g => g.Init());
 	}
 
+    private void Update()
+    {
+        if (Completed)
+        {
+            Destroy(this);
+        }
+    }
+
 }

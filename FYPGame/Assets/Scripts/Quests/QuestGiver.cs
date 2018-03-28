@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuestGiver : Ulrich {
+public class QuestGiver : NPC {
     public bool AssignedQuest { get; set; }
     public bool Helped { get; set; }
     [SerializeField]

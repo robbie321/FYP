@@ -7,9 +7,10 @@ using System;
 
 public class QuestDisplayUI : MonoBehaviour {
     [SerializeField]
-    Text[] dialogueText;
+    Text[] goalsText;
     public GameObject QuestPanel;
     bool looped = true;
+    int number=1;
     public void Start()
     {
     }
@@ -21,22 +22,29 @@ public class QuestDisplayUI : MonoBehaviour {
             {
                 for (int i = 0; i < Quest.Instance.Goals.Count; i++)
                 {
-                    dialogueText[i].text = Quest.Instance.Goals[i].Description;
+                    goalsText[i].text = number+". " + Quest.Instance.Goals[i].Description;
+                    number++;
                 }
                 looped = false;
             }
             for (int i = 0; i < Quest.Instance.Goals.Count; i++)
             {
                 if (Quest.Instance.Goals[i].Completed)
-                    dialogueText[i].color = Color.green;
+                    goalsText[i].color = Color.green;
             }
 
         }
-        catch(Exception e)
+        catch (Exception e)
         {
 
         }
-        
+
+    }
+
+    public void Pressed()
+    {
+       
+
         
     }
 }

@@ -5,26 +5,14 @@ using UnityEngine.Tilemaps;
 
 public class CameraFollow : MonoBehaviour
 {
-
-    /// <summary>
-    /// The camera's target in our case it s the player
-    /// </summary>
+    // The camera's target in our case it s the player
     private Transform target;
-
-    /// <summary>
-    /// The minimum and maximum value of the camera
-    /// </summary>
+    // The minimum and maximum value of the camera
     private float xMax, xMin, yMin, yMax;
-
-    /// <summary>
-    /// A reference to the ground tilemap
-    /// </summary>
+    // A reference to the ground tilemap
     [SerializeField]
     private Tilemap tilemap;
-
-    /// <summary>
-    /// A reference to the player
-    /// </summary>
+    // A reference to the player
     private Player player;
 
     // Use this for initialization
@@ -54,11 +42,7 @@ public class CameraFollow : MonoBehaviour
         transform.position = new Vector3(Mathf.Clamp(target.position.x, xMin, xMax), Mathf.Clamp(target.position.y, yMin, yMax), -10);
     }
 
-    /// <summary>
-    /// Sets the cameras limits, this is used to make sure it can't go over the edge of the main tilemap
-    /// </summary>
-    /// <param name="minTile">The position of the minimum tile</param>
-    /// <param name="maxTile">The position of the maximum tile</param>
+    // Sets the cameras limits, this is used to make sure it can't go over the edge of the main tilemap
     private void SetLimits(Vector3 minTile, Vector3 maxTile)
     {
         Camera cam = Camera.main;
